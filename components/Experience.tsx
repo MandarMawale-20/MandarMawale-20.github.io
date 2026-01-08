@@ -7,7 +7,7 @@ export const ExperienceSection: React.FC = () => {
       id: '1',
       role: 'Web Developer Intern',
       company: 'Utkarsha Interiors',
-      period: '2023 – 2024',
+      period: '2025 – 2026',
       location: 'Full-Stack Development',
       tags: ['Frontend', 'Backend', 'Database', 'Web Development'],
       achievements: [
@@ -21,7 +21,7 @@ export const ExperienceSection: React.FC = () => {
       id: '2',
       role: 'Trainee Intern & Python Mentor',
       company: 'Campus Credentials',
-      period: '2023',
+      period: '2025',
       location: 'Campus Training Program',
       tags: ['Python', 'Mentoring', 'Problem-Solving'],
       achievements: [

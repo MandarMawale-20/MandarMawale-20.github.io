@@ -42,7 +42,6 @@ export const ContactSection: React.FC = () => {
       setStatus('ERROR');
       return;
     }
-
     setStatus('SENDING');
 
     try {

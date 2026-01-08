@@ -12,12 +12,11 @@ export const Footer: React.FC = () => {
             <span className="blinking-cursor"></span>
           </div>
           <p className="text-slate-500 dark:text-slate-600 text-xs">
-            © 2024 Mandar Mawale. All systems operational.
+            © 2026 Mandar Mawale. All systems operational.
           </p>
         </div>
 
         <div className="text-center md:text-right text-slate-500 dark:text-slate-600 text-xs font-mono">
-          Designed with <span className="text-cyan-600 dark:text-cyan-400 font-bold underline">Linux + AI</span> aesthetics.<br/>
           Built with React & Tailwind CSS.
         </div>
 

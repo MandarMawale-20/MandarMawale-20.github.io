@@ -14,7 +14,7 @@ export const ProjectsSection: React.FC = () => {
       description: 'AI-Powered Personalized Study Assistant - A full-stack AI platform that personalizes study plans, quizzes, and feedback using multi-agent orchestration.',
       tags: ['Python', 'FastAPI', 'LangChain', 'MongoDB', 'ChromaDB', 'Next.js', 'Google Gemini', 'Tavily'],
       status: 'LIVE',
-      image: 'https://picsum.photos/seed/proj1/800/600',
+      image: '/AgentED Img.jpg',
     },
     {
       id: '2',
@@ -23,7 +23,7 @@ export const ProjectsSection: React.FC = () => {
       description: 'Globally Synchronized Video Streaming System - A scalable platform delivering personalized video streams synchronized to a global timeline using AWS infrastructure.',
       tags: ['AWS EC2', 'S3', 'CloudFront', 'Redis', 'PostgreSQL'],
       status: 'LIVE',
-      image: 'https://picsum.photos/seed/proj2/800/600',
+      image: '/StreamSync.png',
     },
     {
       id: '3',
@@ -32,7 +32,7 @@ export const ProjectsSection: React.FC = () => {
       description: 'Voice-Based Personal Assistant - A privacy-focused desktop voice assistant designed for reminders and task management, especially for elderly users.',
       tags: ['Python', 'Vosk API', 'pyttsx3', 'Speech Recognition', 'Tkinter'],
       status: 'LIVE',
-      image: 'https://picsum.photos/seed/proj3/800/600',
+      image: '/Voice Care.png',
     }
   ];
 

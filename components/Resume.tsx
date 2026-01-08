@@ -5,8 +5,8 @@ export const ResumeSection: React.FC = () => {
   const handleCVDownload = () => {
     // Create a link element and trigger download
     const link = document.createElement('a');
-    link.href = '/Mandar_Mawale_CV_2024.pdf';
-    link.download = 'Mandar_Mawale_CV_2024.pdf';
+    link.href = '/Mandar_Mawale_CV_2026.pdf';
+    link.download = 'Mandar_Mawale_CV_2026.pdf';
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     document.body.appendChild(link);
@@ -74,7 +74,7 @@ export const ResumeSection: React.FC = () => {
             <div className="bg-gray-300 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 p-6 rounded text-xs space-y-2 max-w-md shadow-sm">
               <div className="grid grid-cols-[100px_1fr] gap-x-2">
                 <span className="text-gray-700 dark:text-slate-500 uppercase">FILE:</span>
-                <span className="text-gray-900 dark:text-white">Mandar_Mawale_CV_2024.pdf</span>
+                <span className="text-gray-900 dark:text-white">Mandar_Mawale_CV_2026.pdf</span>
                 <span className="text-gray-700 dark:text-slate-500 uppercase">STATUS:</span>
                 <span className="text-green-600 dark:text-green-400 font-bold">READY_FOR_HANDSHAKE</span>
               </div>

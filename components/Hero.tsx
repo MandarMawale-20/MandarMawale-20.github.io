@@ -72,7 +72,7 @@ export const Hero: React.FC = () => {
               <div className="w-full md:w-1/4 shrink-0">
             <div className="relative aspect-square w-full rounded-lg overflow-hidden border border-gray-300 dark:border-gray-700">
                   <img 
-                    src="https://picsum.photos/seed/mandar/600/600" 
+                    src="/Neural Net.jpg" 
                     alt="Portrait" 
                     className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                   />

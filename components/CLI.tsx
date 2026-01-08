@@ -5,7 +5,7 @@ export const CLI: React.FC = () => {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<string[]>([
     'Mandar-OS [Version 1.2.0]',
-    '(c) 2024 Mandar Mawale. All systems nominal.',
+    '(c) 2026 Mandar Mawale. All systems nominal.',
     '',
     'Type //help to see available commands.'
   ]);
