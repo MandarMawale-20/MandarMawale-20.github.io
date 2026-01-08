@@ -46,9 +46,35 @@ export const ContactSection: React.FC = () => {
     setStatus('SENDING');
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setStatus('SUCCESS');
-      setFormData({ name: '', email: '', message: '' });
+      // Using Web3Forms API for secure email transmission (free, no backend needed)
+      const webFormKey = import.meta.env.VITE_WEB3FORMS_KEY;
+      
+      if (!webFormKey) {
+        setStatus('ERROR');
+        setErrors(['ERR_CONFIG: Web3Forms key not configured. See SECURE_EMAIL_SETUP.md']);
+        return;
+      }
+
+      const formPayload = new FormData();
+      formPayload.append('access_key', webFormKey);
+      formPayload.append('name', formData.name);
+      formPayload.append('email', formData.email);
+      formPayload.append('message', formData.message);
+      formPayload.append('from_name', formData.name);
+      formPayload.append('subject', `New Message from ${formData.name}`);
+      formPayload.append('redirect', window.location.href);
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formPayload
+      });
+
+      if (response.ok) {
+        setStatus('SUCCESS');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error('Submission failed');
+      }
     } catch (err) {
       setStatus('ERROR');
       setErrors(['ERR_CONN_TIMEOUT: Failed to transmit data to remote host.']);
@@ -75,7 +101,7 @@ export const ContactSection: React.FC = () => {
         <div className="space-y-12 lg:sticky lg:top-32">
           <div className="space-y-4">
             {[
-              { label: 'Protocol: SMTP', val: 'mawalemandar2004@gmail.com', icon: 'mail', href: 'mailto:mawalemandar2004@gmail.com' },
+              { label: 'Protocol: SMTP', val: 'mawalemandar2004@gmail.com', icon: 'mail', href: 'mailto:mawalemandar2004@gmail.com?cc=mawalemandar2004@gmail.com&subject=Connection%20Request' },
               { label: 'Network: LinkedIn', val: '/in/mandarmawale', icon: 'hub', href: 'https://linkedin.com/in/mandarmawale' },
               { label: 'Repository: GitHub', val: '@MandarMawale-20', icon: 'code', href: 'https://github.com/MandarMawale-20' }
             ].map((contact, i) => (

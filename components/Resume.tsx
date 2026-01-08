@@ -2,6 +2,18 @@ import React from 'react';
 import { Terminal } from './Terminal';
 
 export const ResumeSection: React.FC = () => {
+  const handleCVDownload = () => {
+    // Create a link element and trigger download
+    const link = document.createElement('a');
+    link.href = '/Mandar_Mawale_CV_2024.pdf';
+    link.download = 'Mandar_Mawale_CV_2024.pdf';
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-6">
       <div className="flex flex-col gap-6 md:flex-row md:justify-between md:items-end border-b border-slate-200 dark:border-slate-800 pb-12 mb-12">
@@ -19,7 +31,10 @@ export const ResumeSection: React.FC = () => {
         </div>
 
         <div className="shrink-0">
-          <button className="flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white font-bold py-6 px-10 rounded-xl transition-all shadow-xl group scale-110 origin-right">
+          <button 
+            onClick={handleCVDownload}
+            className="flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white font-bold py-6 px-10 rounded-xl transition-all shadow-xl group scale-110 origin-right active:scale-100"
+          >
             <span className="material-symbols-outlined group-hover:animate-bounce">download</span>
             <span>DOWNLOAD CV (PDF)</span>
           </button>

@@ -1,0 +1,13 @@
+This is a placeholder for your CV PDF. 
+In production, replace this with your actual CV file.
+
+To add a real PDF:
+1. Create a proper CV.pdf file
+2. Place it in the public/ folder
+3. The download link will work automatically
+
+CV Details:
+- Name: Mandar Mawale
+- File: Mandar_Mawale_CV_2024.pdf
+- Format: PDF
+- Size: [Your actual file size]
