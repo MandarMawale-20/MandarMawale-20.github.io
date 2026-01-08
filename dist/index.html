@@ -4,14 +4,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mandar Mawale | AI Engineer & Backend Architect</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            slate: {
+              950: '#020617',
+            }
+          }
+        }
+      }
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" />
-  <script type="module" crossorigin src="//assets/index-DKEzyuEX.js"></script>
-  <link rel="stylesheet" crossorigin href="//assets/index-CkgQ9EPm.css">
+  <style>
+    :root {
+      --accent: #0ea5e9;
+      --bg-color: #fcfcfd;
+      --grid-dot: #e2e8f0;
+    }
+    .dark {
+      --accent: #38bdf8;
+      --bg-color: #020617;
+      --grid-dot: #1e293b;
+    }
+    body {
+      font-family: 'Noto Sans', sans-serif;
+      background-color: var(--bg-color);
+      transition: background-color 1.5s cubic-bezier(0.4, 0, 0.2, 1), color 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+      background-image: radial-gradient(var(--grid-dot) 1.2px, transparent 1.2px);
+      background-size: 32px 32px;
+    }
+    .font-mono {
+      font-family: 'Fira Code', monospace;
+    }
+    .blinking-cursor {
+      display: inline-block;
+      width: 9px;
+      height: 1.2em;
+      background-color: currentColor;
+      margin-left: 6px;
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+      background: #334155;
+    }
+  </style>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "react/": "https://esm.sh/react@^19.2.3/",
+      "react": "https://esm.sh/react@^19.2.3",
+      "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+    }
+  }
+  </script>
+  <script type="module" crossorigin src="/assets/index-DNvs9-9T.js"></script>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root"></div>
 </body>
 </html>
