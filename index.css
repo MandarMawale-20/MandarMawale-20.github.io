@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --accent: #0ea5e9;
+    --bg-color: #fcfcfd;
+    --grid-dot: #e2e8f0;
+  }
+
+  .dark {
+    --accent: #38bdf8;
+    --bg-color: #020617;
+    --grid-dot: #1e293b;
+  }
+
+  body {
+    @apply bg-[var(--bg-color)];
+    background-image: radial-gradient(var(--grid-dot) 1.2px, transparent 1.2px);
+    background-size: 32px 32px;
+    transition: background-color 1.5s cubic-bezier(0.4, 0, 0.2, 1), color 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .font-mono {
+    font-family: 'Fira Code', monospace;
+  }
+}
+
+@layer components {
+  .blinking-cursor {
+    @apply inline-block w-[9px] h-[1.2em] bg-current ml-1.5 align-middle;
+    animation: blink 1s step-end infinite;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-[10px];
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-slate-700;
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
