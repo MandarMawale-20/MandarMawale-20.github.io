@@ -45,23 +45,23 @@ export const CLI: React.FC = () => {
     };
 
     if (cmd === 'who are you?' || cmd === 'whoami' || cmd === 'bio') {
-      setHistory(prev => [...prev, 
+      setHistory(prev => [...prev,
         '-------------------------------------------------',
         'IDENTITY: Mandar Mawale',
-        'ROLE: AI Engineer & Systems Architect',
-        'LOC: Silicon Valley / Remote',
-        'BIO: Specializing in high-throughput backend services and fine-tuned LLM deployments.',
+        'ROLE: Aspiring AI & Cloud Engineer',
+        'LOC: India / Remote',
+        'BIO: I build intelligent, scalable systems using Agentic AI, LLMs, and cloud-native backend architectures. Focused on turning complex ideas into production-ready applications.',
         '-------------------------------------------------'
       ]);
     } else if (cmd === 'cat resume.txt' || cmd === 'resume') {
-      setHistory(prev => [...prev, 
+      setHistory(prev => [...prev,
         'Reading file: resume.txt...',
         '-------------------------------------------------',
         'MANDAR MAWALE - RESUME SUMMARY',
         '-------------------------------------------------',
-        '* AI ENGINEER @ NeuralNet_Inc (2023-Present)',
-        '* BACKEND DEV @ ServerSide_Solutions (2021-2023)',
-        '* SKILLS: PyTorch, FastAPI, Docker, K8s, AWS',
+        '* Web Developer Intern @ Utkarsha Interiors (2025–2026): Built and maintained web features, optimized backend and data flow.',
+        '* Trainee Intern & Python Mentor @ Campus Credentials (2025): Led Python training and solved coding issues for students.',
+        '* SKILLS: AI/LLM (LangChain, Gemini), Backend (FastAPI, Flask), Cloud (AWS, Oracle), Databases (PostgreSQL, MongoDB), ML (scikit-learn), DevOps (Git, Linux)',
         '-------------------------------------------------',
         'Type //resume to download the full PDF version.'
       ]);
