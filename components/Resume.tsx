@@ -1,5 +1,6 @@
 import React from 'react';
 import { Terminal } from './Terminal';
+import { MdDownload, MdWifiTethering, MdLock, MdIntegrationInstructions } from 'react-icons/md';
 
 export const ResumeSection: React.FC = () => {
   const handleCVDownload = () => {
@@ -35,7 +36,9 @@ export const ResumeSection: React.FC = () => {
             onClick={handleCVDownload}
             className="flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white font-bold py-6 px-10 rounded-xl transition-all shadow-xl group scale-110 origin-right active:scale-100"
           >
-            <span className="material-symbols-outlined group-hover:animate-bounce">download</span>
+            <div className="group-hover:animate-bounce">
+              <MdDownload size={24} />
+            </div>
             <span>DOWNLOAD CV (PDF)</span>
           </button>
         </div>
@@ -43,17 +46,22 @@ export const ResumeSection: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         {[
-          { icon: 'wifi_tethering', title: 'Connection', val: 'SECURE', sub: ':: VERIFIED ::' },
-          { icon: 'lock', title: 'Encryption', val: 'AES-256', sub: ':: 128-BIT ::' },
-          { icon: 'deployed_code', title: 'Version', val: 'v4.2.0', sub: 'UPDATE: 24H AGO' }
-        ].map((item, i) => (
-          <div key={i} className="bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 p-6 rounded-lg relative overflow-hidden group hover:border-blue-500/50 transition-all shadow-md">
-            <span className="material-symbols-outlined absolute -right-2 -top-2 text-6xl text-gray-400 dark:text-gray-800 group-hover:text-blue-500/10 transition-colors">{item.icon}</span>
-            <p className="text-gray-700 dark:text-slate-500 font-mono text-[10px] uppercase tracking-widest mb-1">{item.title}</p>
-            <p className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{item.val}</p>
-            <p className="text-[10px] font-mono text-gray-600 dark:text-slate-600 mt-4">{item.sub}</p>
-          </div>
-        ))}
+          { icon: MdWifiTethering, title: 'Connection', val: 'SECURE', sub: ':: VERIFIED ::' },
+          { icon: MdLock, title: 'Encryption', val: 'AES-256', sub: ':: 128-BIT ::' },
+          { icon: MdIntegrationInstructions, title: 'Version', val: 'v4.2.0', sub: 'UPDATE: 24H AGO' }
+        ].map((item, i) => {
+          const IconComponent = item.icon;
+          return (
+            <div key={i} className="bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 p-6 rounded-lg relative overflow-hidden group hover:border-blue-500/50 transition-all shadow-md">
+              <div className="absolute -right-2 -top-2 text-gray-400 dark:text-gray-800 group-hover:text-blue-500/10 transition-colors">
+                <IconComponent size={96} />
+              </div>
+              <p className="text-gray-700 dark:text-slate-500 font-mono text-[10px] uppercase tracking-widest mb-1">{item.title}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{item.val}</p>
+              <p className="text-[10px] font-mono text-gray-600 dark:text-slate-600 mt-4">{item.sub}</p>
+            </div>
+          );
+        })}
       </div>
 
       <Terminal title="guest@mandar-ai:~/downloads" headerIcon="lock" className="min-h-[350px]">

@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { MdTerminal, MdLightMode, MdDarkMode, MdDownload } from 'react-icons/md';
 
 interface NavbarProps {
   activeSection: string;
@@ -34,7 +35,9 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, darkMode, setDark
           className="flex items-center gap-4 text-slate-900 dark:text-white hover:text-[#00e5ff] transition-colors duration-300 cursor-pointer group"
         >
           <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 group-hover:border-[#00e5ff]/50 transition-all">
-            <span className="material-symbols-outlined text-[#00e5ff] text-xl">terminal</span>
+            <div className="text-[#00e5ff]">
+              <MdTerminal size={20} />
+            </div>
           </div>
           <div className="flex flex-col">
             <h2 className="text-lg font-bold tracking-tight leading-none uppercase">Mandar Mawale</h2>
@@ -67,14 +70,18 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, darkMode, setDark
             className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-[#00e5ff] hover:border-[#00e5ff]/30 transition-all"
             title="Toggle Mode"
           >
-            <span className="material-symbols-outlined">{darkMode ? 'light_mode' : 'dark_mode'}</span>
+            <div className="flex items-center justify-center">
+              {darkMode ? <MdLightMode size={20} /> : <MdDarkMode size={20} />}
+            </div>
           </button>
           
           <button 
             onClick={() => scrollTo('resume')}
             className="hidden sm:flex items-center gap-2 bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 border border-[#00e5ff]/30 hover:border-[#00e5ff] text-[#00e5ff] px-5 py-2 rounded-lg text-sm font-mono font-bold transition-all group"
           >
-            <span className="material-symbols-outlined text-lg">download</span>
+            <div className="flex-shrink-0">
+              <MdDownload size={18} />
+            </div>
             <span>CV</span>
           </button>
         </div>

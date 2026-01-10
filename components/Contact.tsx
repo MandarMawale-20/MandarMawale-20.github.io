@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { MdMail, MdHub, MdCode, MdArrowForward, MdCheckCircle, MdSend, MdHourglassTop } from 'react-icons/md';
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -100,23 +101,28 @@ export const ContactSection: React.FC = () => {
         <div className="space-y-12 lg:sticky lg:top-32">
           <div className="space-y-4">
             {[
-              { label: 'Protocol: SMTP', val: 'mawalemandar2004@gmail.com', icon: 'mail', href: 'mailto:mawalemandar2004@gmail.com?cc=mawalemandar2004@gmail.com&subject=Connection%20Request' },
-              { label: 'Network: LinkedIn', val: '/in/mandarmawale', icon: 'hub', href: 'https://linkedin.com/in/mandarmawale' },
-              { label: 'Repository: GitHub', val: '@MandarMawale-20', icon: 'code', href: 'https://github.com/MandarMawale-20' }
-            ].map((contact, i) => (
+              { label: 'Protocol: SMTP', val: 'mawalemandar2004@gmail.com', icon: MdMail, href: 'mailto:mawalemandar2004@gmail.com?cc=mawalemandar2004@gmail.com&subject=Connection%20Request' },
+              { label: 'Network: LinkedIn', val: '/in/mandarmawale', icon: MdHub, href: 'https://linkedin.com/in/mandarmawale' },
+              { label: 'Repository: GitHub', val: '@MandarMawale-20', icon: MdCode, href: 'https://github.com/MandarMawale-20' }
+            ].map((contact, i) => {
+              const IconComponent = contact.icon;
+              return (
               <a key={i} href={contact.href} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between p-5 bg-gray-200 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-300 dark:border-gray-700 hover:border-cyan-500/50 rounded-xl transition-all shadow-xl">
                 <div className="flex items-center gap-6">
-                  <div className="w-14 h-14 rounded-lg bg-gray-300 dark:bg-gray-950 flex items-center justify-center border border-gray-300 dark:border-gray-800 group-hover:border-cyan-500/50 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-all">
-                    <span className="material-symbols-outlined text-2xl">{contact.icon}</span>
+                  <div className="w-14 h-14 rounded-lg bg-gray-300 dark:bg-gray-950 flex items-center justify-center border border-gray-300 dark:border-gray-800 group-hover:border-cyan-500/50 text-gray-600 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-all">
+                    <IconComponent size={24} />
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="text-[10px] text-cyan-600 dark:text-cyan-400 font-mono uppercase tracking-widest">{contact.label}</span>
                     <span className="text-gray-900 dark:text-white font-medium text-lg group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">{contact.val}</span>
                   </div>
                 </div>
-                <span className="material-symbols-outlined text-gray-600 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 group-hover:translate-x-1 transition-all">arrow_forward</span>
+                <div className="text-gray-600 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 group-hover:translate-x-1 transition-all">
+                  <MdArrowForward size={20} />
+                </div>
               </a>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -158,7 +164,7 @@ export const ContactSection: React.FC = () => {
                   <div className="space-y-1">
                     {errors.map((err, i) => (
                       <p key={i} className="text-red-400 flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[14px]">terminal</span>
+                        <MdMail size={14} />
                         {err}
                       </p>
                     ))}
@@ -168,7 +174,7 @@ export const ContactSection: React.FC = () => {
                 {status === 'SUCCESS' && (
                   <div className="space-y-1">
                     <p className="text-green-400 font-bold flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[14px]">check_circle</span>
+                      <MdCheckCircle size={14} />
                       [OK] Handshake successful. Message transmitted.
                     </p>
                     <p className="text-slate-500 text-xs">Awaiting response from system admin...</p>
@@ -226,9 +232,13 @@ export const ContactSection: React.FC = () => {
                       disabled={status === 'SENDING'}
                       className="w-full bg-cyan-600 hover:bg-cyan-500 disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-bold py-4 rounded-lg flex items-center justify-center gap-3 transition-all group overflow-hidden relative shadow-lg"
                     >
-                      <span className="material-symbols-outlined relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
-                        {status === 'SENDING' ? 'hourglass_top' : 'send'}
-                      </span>
+                      <div className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
+                        {status === 'SENDING' ? (
+                          <MdHourglassTop size={20} />
+                        ) : (
+                          <MdSend size={20} />
+                        )}
+                      </div>
                       <span className="font-mono tracking-widest uppercase relative z-10">
                         {status === 'SENDING' ? '[ TRANSMITTING... ]' : '[ EXECUTE_SEND ]'}
                       </span>

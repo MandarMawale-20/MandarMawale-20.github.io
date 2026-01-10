@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { MdTerminal } from 'react-icons/md';
 
 export const CLI: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -122,7 +123,9 @@ export const CLI: React.FC = () => {
         <div className="w-[320px] md:w-[500px] h-[350px] bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
           <div className="bg-gray-100 dark:bg-gray-800 px-4 py-2 border-b border-gray-300 dark:border-gray-700 flex items-center justify-between select-none">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[14px] text-cyan-400">terminal</span>
+              <div className="text-cyan-400">
+                <MdTerminal size={14} />
+              </div>
               <span className="text-[10px] text-gray-600 dark:text-slate-400 font-bold uppercase tracking-widest">Mandar_Terminal_v1.2</span>
             </div>
             <div className="flex gap-2">
@@ -162,7 +165,9 @@ export const CLI: React.FC = () => {
           onClick={() => setIsOpen(true)}
           className="w-14 h-14 bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-xl flex items-center justify-center text-cyan-600 dark:text-cyan-400 shadow-xl hover:scale-105 transition-all group"
         >
-          <span className="material-symbols-outlined text-2xl">terminal</span>
+          <div className="text-cyan-600 dark:text-cyan-400">
+            <MdTerminal size={32} />
+          </div>
           <span className="absolute -top-1 -right-1 flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>

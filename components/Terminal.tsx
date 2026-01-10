@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdLock } from 'react-icons/md';
 
 interface TerminalProps {
   title: string;
@@ -9,6 +10,11 @@ interface TerminalProps {
 }
 
 export const Terminal: React.FC<TerminalProps> = ({ title, children, className = '', headerIcon = 'lock', footer }) => {
+  const getIconComponent = (iconName: string) => {
+    if (iconName === 'lock') return <MdLock size={14} />;
+    return <MdLock size={14} />;
+  };
+
   return (
     <div className={`rounded-lg overflow-hidden border border-gray-300 dark:border-gray-700 shadow-2xl bg-gray-200 dark:bg-gray-900 flex flex-col transition-all duration-300 ${className}`}>
       {/* Terminal Header */}
@@ -19,7 +25,7 @@ export const Terminal: React.FC<TerminalProps> = ({ title, children, className =
           <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
         </div>
         <div className="flex items-center gap-2 text-[10px] md:text-xs text-gray-600 dark:text-slate-400 font-mono">
-          <span className="material-symbols-outlined text-[14px]">{headerIcon}</span>
+          {getIconComponent(headerIcon)}
           {title}
         </div>
         <div className="flex gap-1">

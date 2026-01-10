@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { MdTerminal } from 'react-icons/md';
 
 export const Footer: React.FC = () => {
   return (
@@ -7,7 +8,9 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-mono text-sm">
-            <span className="material-symbols-outlined text-sm text-cyan-600 dark:text-cyan-400">terminal</span>
+            <div className="text-cyan-600 dark:text-cyan-400">
+              <MdTerminal size={14} />
+            </div>
             <span>root@mandar:~/portfolio/end</span>
             <span className="blinking-cursor"></span>
           </div>

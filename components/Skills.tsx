@@ -1,41 +1,42 @@
 import React from 'react';
+import { MdTerminal, MdSmartToy, MdDns, MdStorage, MdCloud, MdAnalytics, MdBuild, MdDonutLarge, MdUpgrade } from 'react-icons/md';
 
 export const Skills: React.FC = () => {
   const modules = [
     {
       title: "AI / LLM & Agentic Systems",
       module: "agentic_ai",
-      icon: "smart_toy",
+      icon: MdSmartToy,
       skills: ["LangChain", "LangGraph", "Google Gemini", "Prompt Engineering", "Retrieval-Augmented Generation (RAG)", "Tool Calling & Agent Orchestration"]
     },
     {
       title: "Backend & API Development",
       module: "backend_dev",
-      icon: "dns",
+      icon: MdDns,
       skills: ["FastAPI", "Flask", "Spring", "Spring Boot", "REST APIs", "JSON", "Session-based Architectures"]
     },
     {
       title: "Databases & Vector Stores",
       module: "databases",
-      icon: "storage",
+      icon: MdStorage,
       skills: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "ChromaDB", "Pinecone", "MinIO"]
     },
     {
       title: "Cloud Platforms",
       module: "cloud_infra",
-      icon: "cloud",
+      icon: MdCloud,
       skills: ["AWS (EC2, S3, CloudFront)", "Oracle Cloud", "Deployment & Scaling"]
     },
     {
       title: "Machine Learning & NLP",
       module: "ml_nlp",
-      icon: "analytics",
+      icon: MdAnalytics,
       skills: ["Scikit-learn", "Pandas", "NLTK"]
     },
     {
       title: "Tools & IDEs",
       module: "dev_tools",
-      icon: "build",
+      icon: MdBuild,
       skills: ["Git", "VS Code", "IntelliJ IDEA", "Android Studio", "Linux"]
     }
   ];
@@ -44,7 +45,9 @@ export const Skills: React.FC = () => {
     <div className="max-w-7xl mx-auto px-6">
       <div className="flex flex-col gap-3 border-b border-slate-200 dark:border-slate-800 pb-8 mb-12">
         <div className="flex items-center gap-2 text-xs font-mono text-cyan-600 dark:text-[#00e5ff]/80">
-          <span className="material-symbols-outlined text-sm">terminal</span>
+          <div className="flex-shrink-0">
+            <MdTerminal size={14} />
+          </div>
           /home/mandar/skills
         </div>
         <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
@@ -65,13 +68,17 @@ export const Skills: React.FC = () => {
                 <p className="text-cyan-600 dark:text-cyan-400 text-[10px] font-mono uppercase tracking-widest mb-1">System Capability</p>
                 <p className="text-gray-900 dark:text-white text-xl font-bold">Proficiency Index</p>
               </div>
-              <span className="material-symbols-outlined text-cyan-600 dark:text-cyan-400">donut_large</span>
+              <div className="text-cyan-600 dark:text-cyan-400">
+                <MdDonutLarge size={24} />
+              </div>
             </div>
             
             <div className="flex items-end gap-3 mb-10">
               <p className="text-6xl font-bold text-gray-900 dark:text-white leading-none">84<span className="text-2xl text-cyan-600 dark:text-cyan-400/80">%</span></p>
               <div className="flex items-center gap-1 bg-green-500/10 border border-green-500/20 px-2 py-0.5 rounded text-green-400 text-[10px] font-mono mb-1">
-                <span className="material-symbols-outlined text-[12px]">upgrade</span>
+                <div className="flex-shrink-0">
+                  <MdUpgrade size={12} />
+                </div>
                 ACTIVE DEVELOPMENT
               </div>
             </div>
@@ -101,11 +108,15 @@ export const Skills: React.FC = () => {
         </div>
 
         <div className="lg:col-span-8 space-y-6">
-          {modules.map((mod) => (
+          {modules.map((mod) => {
+            const IconComponent = mod.icon;
+            return (
             <div key={mod.title} className="bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg overflow-hidden group hover:border-cyan-500/30 transition-all shadow-lg">
               <div className="bg-gray-300 dark:bg-gray-800 px-6 py-4 border-b border-gray-300 dark:border-gray-700 flex justify-between items-center">
                 <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-cyan-400">{mod.icon}</span>
+                  <div className="text-cyan-400">
+                    <IconComponent size={20} />
+                  </div>
                   <div>
                     <h3 className="text-white text-base font-bold">{mod.title}</h3>
                     <p className="text-cyan-400/60 text-[10px] font-mono uppercase tracking-widest">module: {mod.module}</p>
@@ -125,7 +136,8 @@ export const Skills: React.FC = () => {
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
       <div className="mt-8 ml-4 flex items-center py-4">

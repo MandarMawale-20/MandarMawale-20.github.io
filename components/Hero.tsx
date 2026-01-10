@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Terminal } from './Terminal';
+import { MdArrowForward, MdDownload, MdSettingsSuggest } from 'react-icons/md';
 
 export const Hero: React.FC = () => {
   const [cpuLoad, setCpuLoad] = useState(12.4);
@@ -46,13 +47,17 @@ export const Hero: React.FC = () => {
             className="px-8 py-4 bg-cyan-600 dark:bg-cyan-500 hover:bg-cyan-700 dark:hover:bg-cyan-400 text-white dark:text-[#020617] font-bold rounded-lg transition-all shadow-lg flex items-center gap-2 group"
           >
             <span>VIEW PROJECTS</span>
-            <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            <div className="group-hover:translate-x-1 transition-transform">
+              <MdArrowForward size={20} />
+            </div>
           </button>
           <button 
             onClick={() => scrollTo('resume')}
             className="px-8 py-4 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:border-cyan-500 text-slate-900 dark:text-white font-bold rounded-lg transition-all flex items-center gap-2"
           >
-            <span className="material-symbols-outlined text-lg text-cyan-700 dark:text-cyan-400">download</span>
+            <div className="text-cyan-700 dark:text-cyan-400">
+              <MdDownload size={20} />
+            </div>
             <span>DOWNLOAD CV</span>
           </button>
         </div>
@@ -102,7 +107,9 @@ export const Hero: React.FC = () => {
           <div className="bg-gray-200 dark:bg-gray-900 rounded-lg border border-gray-300 dark:border-gray-700 overflow-hidden shadow-lg">
             <div className="px-6 py-4 border-b border-gray-300 dark:border-gray-700 flex justify-between items-center bg-gray-300 dark:bg-gray-800">
               <h3 className="text-white font-bold text-lg">System Specs</h3>
-              <span className="material-symbols-outlined text-slate-500">settings_suggest</span>
+              <div className="text-slate-500">
+                <MdSettingsSuggest size={24} />
+              </div>
             </div>
             <div className="grid grid-cols-2 divide-x divide-gray-300 dark:divide-gray-700 border-b border-gray-300 dark:border-gray-700 text-xs">
               <div className="p-4">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Experience } from '../types';
+import { MdCommit, MdCallSplit, MdLocationOn, MdChevronRight } from 'react-icons/md';
 
 export const ExperienceSection: React.FC = () => {
   const experiences: Experience[] = [
@@ -61,9 +62,13 @@ export const ExperienceSection: React.FC = () => {
         {experiences.map((exp, idx) => (
           <div key={exp.id} className="relative mb-12 last:mb-0">
             <div className="absolute left-[-28px] md:left-[-60px] top-2 flex items-center justify-center bg-transparent p-1 z-10">
-              <span className={`material-symbols-outlined text-[32px] ${exp.active ? 'text-cyan-600 dark:text-[#00e5ff] drop-shadow-sm' : 'text-gray-500 dark:text-slate-700'}`}>
-                {exp.active ? 'commit' : 'call_split'}
-              </span>
+              <div className={exp.active ? "text-cyan-600 dark:text-[#00e5ff] drop-shadow-sm" : "text-gray-500 dark:text-slate-700"}>
+                {exp.active ? (
+                  <MdCommit size={32} />
+                ) : (
+                  <MdCallSplit size={32} />
+                )}
+              </div>
             </div>
 
             <div className="flex flex-col gap-2 mb-2 font-mono ml-4">
@@ -81,7 +86,9 @@ export const ExperienceSection: React.FC = () => {
                   <p className="text-lg text-gray-700 dark:text-slate-400 font-mono">@{exp.company}</p>
                 </div>
                 <div className="flex items-center gap-1.5 text-xs text-gray-600 dark:text-slate-400 bg-gray-300 dark:bg-gray-800 px-3 py-1.5 rounded-full border border-gray-300 dark:border-gray-700">
-                  <span className="material-symbols-outlined text-sm text-cyan-400">location_on</span>
+                  <div className="text-cyan-400">
+                    <MdLocationOn size={14} />
+                  </div>
                   <span className="font-mono">{exp.location}</span>
                 </div>
               </div>
@@ -96,7 +103,9 @@ export const ExperienceSection: React.FC = () => {
 
               <div className="space-y-4 font-mono text-sm md:text-base text-gray-700 dark:text-slate-400">
                 <p className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 font-bold">
-                  <span className="material-symbols-outlined text-sm">chevron_right</span>
+                  <div className="flex-shrink-0">
+                    <MdChevronRight size={14} />
+                  </div>
                   cat ./achievements.txt
                 </p>
                 <div className="pl-6 border-l border-gray-300 dark:border-gray-700 space-y-4">
