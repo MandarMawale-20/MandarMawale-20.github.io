@@ -1,9 +1,10 @@
 
 import React from 'react';
+import type { SectionKey } from '../utils/seoConfig';
 import { MdTerminal, MdLightMode, MdDarkMode, MdDownload } from 'react-icons/md';
 
 interface NavbarProps {
-  activeSection: string;
+  activeSection: SectionKey;
   darkMode: boolean;
   setDarkMode: (val: boolean) => void;
 }
