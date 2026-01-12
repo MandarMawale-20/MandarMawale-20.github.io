@@ -80,8 +80,8 @@ export const ProjectsSection: React.FC = () => {
             <div className="flex flex-col md:flex-row h-full">
               <div className="md:w-1/3 relative h-48 md:h-auto overflow-hidden">
                 <img src={proj.image} alt={proj.title} className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-gray-900 hidden md:block"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent md:hidden"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-transparent to-gray-900 hidden md:block"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-gray-900 to-transparent md:hidden"></div>
               </div>
               <div className="md:w-2/3 p-8">
                 <p className="text-[#38bdf8] text-[10px] font-mono uppercase tracking-[0.2em] mb-2">{proj.category}</p>
@@ -102,7 +102,7 @@ export const ProjectsSection: React.FC = () => {
 
       {/* Deep-Dive Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 z-[150] flex items-center justify-center p-6 bg-slate-900/80 backdrop-blur-md animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-150 flex items-center justify-center p-6 bg-slate-900/80 backdrop-blur-md animate-in fade-in duration-300">
           <div className="w-full max-w-4xl max-h-[90vh] overflow-y-auto">
             <Terminal 
               title={`arch_view::${selectedProject.title.toLowerCase().replace(/\s/g, '_')}`} 
@@ -110,7 +110,7 @@ export const ProjectsSection: React.FC = () => {
               footer={
                 <div className="flex justify-end gap-4">
                   <button onClick={() => setSelectedProject(null)} className="px-6 py-2 border border-slate-700 text-slate-400 hover:text-white font-mono text-xs rounded transition-all">EXIT_LOGS</button>
-                  <button className="px-6 py-2 bg-[#38bdf8] text-[#020617] font-bold font-mono text-xs rounded hover:bg-[#0ea5e9] transition-all">VIEW_RESOURCES</button>
+                  <button className="px-6 py-2 bg-[#38bdf8] text-slate-950 font-bold font-mono text-xs rounded hover:bg-[#0ea5e9] transition-all">VIEW_RESOURCES</button>
                 </div>
               }
             >

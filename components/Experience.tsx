@@ -45,11 +45,11 @@ export const ExperienceSection: React.FC = () => {
           <div className="text-xs text-slate-500 font-mono tracking-wide uppercase">bash — log_viewer</div>
           <div className="w-8"></div>
         </div>
-        <div className="p-8">
-          <h2 className="text-4xl md:text-5xl font-black text-cyan-600 dark:text-cyan-400 mb-4">
+        <div className="p-4 md:p-8">
+          <h2 className="text-2xl md:text-5xl font-black text-cyan-600 dark:text-cyan-400 mb-4 break-all">
             ./experience_log.sh
           </h2>
-          <div className="flex flex-wrap gap-2 text-sm font-mono text-gray-700 dark:text-slate-300">
+          <div className="flex flex-wrap gap-2 text-xs md:text-sm font-mono text-gray-700 dark:text-slate-300 break-all">
             <span className="text-green-600 dark:text-green-400">mandar@system</span>:<span className="text-cyan-600 dark:text-cyan-400">~/work_history</span>$
             <span className="text-gray-900 dark:text-white"> grep -r "achievements" . --sort=date</span>
           </div>
@@ -57,11 +57,11 @@ export const ExperienceSection: React.FC = () => {
       </div>
 
       <div className="relative flex flex-col pl-4 md:pl-12">
-        <div className="absolute left-[20px] md:left-[52px] top-0 bottom-0 w-[2px] bg-gray-300 dark:bg-slate-800"></div>
+        <div className="absolute left-5 md:left-13 top-0 bottom-0 w-0.5 bg-gray-300 dark:bg-slate-800"></div>
         
         {experiences.map((exp, idx) => (
           <div key={exp.id} className="relative mb-12 last:mb-0">
-            <div className="absolute left-[-28px] md:left-[-60px] top-2 flex items-center justify-center bg-transparent p-1 z-10">
+            <div className="absolute -left-7 md:-left-15 top-2 flex items-center justify-center bg-transparent p-1 z-10">
               <div className={exp.active ? "text-cyan-600 dark:text-[#00e5ff] drop-shadow-sm" : "text-gray-500 dark:text-slate-700"}>
                 {exp.active ? (
                   <MdCommit size={32} />
@@ -103,7 +103,7 @@ export const ExperienceSection: React.FC = () => {
 
               <div className="space-y-4 font-mono text-sm md:text-base text-gray-700 dark:text-slate-400">
                 <p className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 font-bold">
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <MdChevronRight size={14} />
                   </div>
                   cat ./achievements.txt

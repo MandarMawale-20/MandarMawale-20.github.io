@@ -24,7 +24,7 @@ export const ResumeSection: React.FC = () => {
             <span className="text-cyan-600 dark:text-cyan-400 text-xs font-mono uppercase tracking-widest">Information Retrieval Protocol</span>
           </div>
           <h2 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-tight">
-            ENGINEERING  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-500 dark:to-cyan-400">DOSSIER</span>
+            ENGINEERING  <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-500 dark:to-cyan-400">DOSSIER</span>
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl font-light">
             Download the comprehensive dossier containing my engineering specifications, professional history, and full technical stack.
@@ -34,7 +34,7 @@ export const ResumeSection: React.FC = () => {
         <div className="shrink-0">
           <button 
             onClick={handleCVDownload}
-            className="flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white font-bold py-6 px-10 rounded-xl transition-all shadow-xl group scale-110 origin-right active:scale-100"
+            className="w-full md:w-auto flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-6 md:py-6 md:px-10 rounded-xl transition-all shadow-xl group md:scale-110 md:origin-right active:scale-100"
           >
             <div className="group-hover:animate-bounce">
               <MdDownload size={24} />
@@ -64,14 +64,14 @@ export const ResumeSection: React.FC = () => {
         })}
       </div>
 
-      <Terminal title="guest@mandar-ai:~/downloads" headerIcon="lock" className="min-h-[350px]">
+      <Terminal title="guest@mandar-ai:~/downloads" headerIcon="lock" className="min-h-87.5">
         <div className="flex flex-col lg:flex-row h-full">
-          <div className="flex-grow p-4 md:p-8 space-y-6">
+          <div className="grow p-4 md:p-8 space-y-6">
             <div className="space-y-2">
-              <p className="flex items-center gap-2">
+              <p className="flex flex-wrap items-center gap-2">
                 <span className="text-blue-600 dark:text-blue-400">➜</span>
                 <span className="text-cyan-600 dark:text-cyan-400">~</span>
-                <span className="text-gray-900 dark:text-white font-bold">./initiate_transfer.sh --target=resume</span>
+                <span className="text-gray-900 dark:text-white font-bold break-all">./initiate_transfer.sh --target=resume</span>
               </p>
               <div className="pl-4 border-l border-gray-300 dark:border-gray-700 space-y-1 text-xs">
                 <p className="text-gray-600 dark:text-slate-500">[10:42:01] <span className="text-gray-800 dark:text-slate-300">Establishing handshake...</span></p>
@@ -79,12 +79,12 @@ export const ResumeSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-gray-300 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 p-6 rounded text-xs space-y-2 max-w-md shadow-sm">
-              <div className="grid grid-cols-[100px_1fr] gap-x-2">
+            <div className="bg-gray-300 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 p-4 md:p-6 rounded text-xs space-y-2 max-w-md shadow-sm overflow-hidden">
+              <div className="grid grid-cols-[80px_1fr] md:grid-cols-[100px_1fr] gap-x-2">
                 <span className="text-gray-700 dark:text-slate-500 uppercase">FILE:</span>
-                <span className="text-gray-900 dark:text-white">Mandar_Mawale_CV_2026.pdf</span>
+                <span className="text-gray-900 dark:text-white break-all">Mandar_Mawale_CV_2026.pdf</span>
                 <span className="text-gray-700 dark:text-slate-500 uppercase">STATUS:</span>
-                <span className="text-green-600 dark:text-green-400 font-bold">READY_FOR_HANDSHAKE</span>
+                <span className="text-green-600 dark:text-green-400 font-bold break-all">READY_FOR_HANDSHAKE</span>
               </div>
             </div>
 

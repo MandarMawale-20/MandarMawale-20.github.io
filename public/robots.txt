@@ -4,3 +4,4 @@ Disallow: /node_modules/
 Disallow: /.git/
 
 Sitemap: https://mandarmawale.me/sitemap.xml
+LLM-Full-Content: https://mandarmawale.me/llm.txt

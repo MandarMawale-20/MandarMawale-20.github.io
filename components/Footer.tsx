@@ -19,10 +19,6 @@ export const Footer: React.FC = () => {
           </p>
         </div>
 
-        <div className="text-center md:text-right text-slate-500 dark:text-slate-600 text-xs font-mono">
-          Built with React & Tailwind CSS.
-        </div>
-
         <div className="flex items-center gap-6">
           <a href="#" className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-xs font-mono border-b border-transparent hover:border-cyan-500">Privacy_Policy</a>
           <a href="#" className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors text-xs font-mono border-b border-transparent hover:border-cyan-500">Terms_of_Service</a>

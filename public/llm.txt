@@ -1,0 +1,36 @@
+Mandar Mawale - Aspiring AI & Cloud Engineer | Backend Architect
+
+I build intelligent, scalable systems using Agentic AI, LLMs, and cloud-native backend architectures. I focus on turning complex ideas into production-ready applications with clean architecture, high performance, and maintainability.
+
+About Me:
+Computer Engineering undergraduate with hands-on experience in AI systems, backend development, and cloud infrastructure. Enjoys designing agentic AI workflows, RAG pipelines, and scalable APIs. Strong builder mindset and problem-solving focus.
+
+Core Expertise:
+- Programming: Python, TypeScript, SQL
+- AI & ML: Machine Learning, LLMs, Agentic AI, RAG pipelines
+- Backend: API Design, Microservices, Clean Architecture
+- Cloud & DevOps: AWS, Azure, Docker, Kubernetes, CI/CD
+- Tools & IDEs: Git, VS Code, IntelliJ IDEA, Linux
+
+Key Projects:
+1. AgentED (AI / ML)
+   - AI-Powered Personalized Study Assistant
+   - Technologies: Python, FastAPI, LangChain, MongoDB, ChromaDB, Next.js, Google Gemini, Tavily
+
+2. StreamSync (Cloud)
+   - Globally Synchronized Video Streaming System
+   - Technologies: AWS EC2, S3, CloudFront, Redis, PostgreSQL
+
+3. VoiceCare (Voice Assistant)
+   - Privacy-focused desktop voice assistant
+   - Technologies: Python, Vosk API, pyttsx3, Tkinter, Speech Recognition
+
+Professional Links:
+- Portfolio: https://mandarmawale.me
+- LinkedIn: https://www.linkedin.com/in/mandar-mawale/
+- GitHub: https://github.com/MandarMawale-20
+- Email: mawalemandar2004@gmail.com
+
+Additional Notes:
+- More projects coming soon (IN PROGRESS)
+- Focus: Clean architecture, scalability, usability

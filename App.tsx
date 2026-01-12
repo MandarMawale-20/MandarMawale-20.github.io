@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { usePageSEO } from './hooks/usePageSEO';
+import type { SectionKey } from './utils/seoConfig';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Skills } from './components/Skills';
@@ -11,7 +13,8 @@ import { CLI } from './components/CLI';
 import { DataBackground } from './components/DataBackground';
 
 const App: React.FC = () => {
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState<SectionKey>('home');
+  const seoHead = usePageSEO(activeSection);
   // Initialize theme based on time of day (Dark mode from 6 PM to 6 AM)
   const [darkMode, setDarkMode] = useState(() => {
     const hours = new Date().getHours();
@@ -20,7 +23,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'experience', 'skills', 'projects', 'resume', 'contact'];
+      const sections: SectionKey[] = ['home', 'experience', 'skills', 'projects', 'resume', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -46,6 +49,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-transparent text-slate-900 dark:text-slate-200 transition-colors duration-1000 overflow-x-hidden">
+      {seoHead}
       <DataBackground />
       <Navbar activeSection={activeSection} darkMode={darkMode} setDarkMode={setDarkMode} />
       

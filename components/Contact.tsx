@@ -97,37 +97,44 @@ export const ContactSection: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-        <div className="space-y-12 lg:sticky lg:top-32">
-          <div className="space-y-4">
+      <div className="grid lg:grid-cols-2 gap-8 md:gap-16 lg:gap-24 items-start">
+        <div className="space-y-6 md:space-y-12 lg:sticky lg:top-32">
+          <div className="space-y-3 md:space-y-4">
             {[
-              { label: 'Protocol: SMTP', val: 'mawalemandar2004@gmail.com', icon: MdMail, href: 'mailto:mawalemandar2004@gmail.com?cc=mawalemandar2004@gmail.com&subject=Connection%20Request' },
-              { label: 'Network: LinkedIn', val: '/in/mandarmawale', icon: MdHub, href: 'https://linkedin.com/in/mandarmawale' },
+              { label: 'Protocol: SMTP', val: 'mawalemandar2004@gmail.com', icon: MdMail, href: 'mailto:mawalemandar2004@gmail.com?subject=Connection%20Request' },
+              { label: 'Network: LinkedIn', val: '/in/mandar-mawale', icon: MdHub, href: 'https://www.linkedin.com/in/mandar-mawale/' },
               { label: 'Repository: GitHub', val: '@MandarMawale-20', icon: MdCode, href: 'https://github.com/MandarMawale-20' }
             ].map((contact, i) => {
               const IconComponent = contact.icon;
+              const isMailto = contact.href.startsWith('mailto:');
               return (
-              <a key={i} href={contact.href} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between p-5 bg-gray-200 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-300 dark:border-gray-700 hover:border-cyan-500/50 rounded-xl transition-all shadow-xl">
-                <div className="flex items-center gap-6">
-                  <div className="w-14 h-14 rounded-lg bg-gray-300 dark:bg-gray-950 flex items-center justify-center border border-gray-300 dark:border-gray-800 group-hover:border-cyan-500/50 text-gray-600 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-all">
-                    <IconComponent size={24} />
+                <a
+                  key={i}
+                  href={contact.href}
+                  target={isMailto ? undefined : '_blank'}
+                  rel={isMailto ? undefined : 'noopener noreferrer'}
+                  className="group flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0 p-4 md:p-5 bg-gray-200 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-300 dark:border-gray-700 hover:border-cyan-500/50 rounded-xl transition-all shadow-xl"
+                >
+                  <div className="flex items-center gap-3 md:gap-6 min-w-0">
+                    <div className="w-12 md:w-14 h-12 md:h-14 shrink-0 rounded-lg bg-gray-300 dark:bg-gray-950 flex items-center justify-center border border-gray-300 dark:border-gray-800 group-hover:border-cyan-500/50 text-gray-600 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-all">
+                      <IconComponent size={20} className="md:w-6 md:h-6" />
+                    </div>
+                    <div className="flex flex-col gap-1 min-w-0">
+                      <span className="text-[10px] text-cyan-600 dark:text-cyan-400 font-mono uppercase tracking-widest">{contact.label}</span>
+                      <span className="text-gray-900 dark:text-white font-medium text-sm md:text-lg group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors truncate md:truncate-none">{contact.val}</span>
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="text-[10px] text-cyan-600 dark:text-cyan-400 font-mono uppercase tracking-widest">{contact.label}</span>
-                    <span className="text-gray-900 dark:text-white font-medium text-lg group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">{contact.val}</span>
+                  <div className="text-gray-600 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 group-hover:translate-x-1 transition-all shrink-0">
+                    <MdArrowForward size={18} className="md:w-5 md:h-5" />
                   </div>
-                </div>
-                <div className="text-gray-600 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 group-hover:translate-x-1 transition-all">
-                  <MdArrowForward size={20} />
-                </div>
-              </a>
+                </a>
               );
             })}
           </div>
         </div>
 
         <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-b from-cyan-500/20 to-transparent rounded-2xl blur-md opacity-30 group-hover:opacity-60 transition duration-1000"></div>
+          <div className="absolute -inset-1 bg-linear-to-b from-cyan-500/20 to-transparent rounded-2xl blur-md opacity-30 group-hover:opacity-60 transition duration-1000"></div>
           <div className="relative bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl overflow-hidden shadow-2xl">
             <div className="bg-gray-300 dark:bg-gray-800 px-6 py-4 border-b border-gray-300 dark:border-gray-700 flex items-center justify-between">
               <div className="flex gap-2">
@@ -138,9 +145,9 @@ export const ContactSection: React.FC = () => {
               <div className="text-[10px] text-gray-600 dark:text-slate-400 font-mono tracking-wide uppercase">root@mandar-portfolio:~/contact</div>
             </div>
             
-            <div className="p-8 space-y-8">
-              <div className="bg-gray-300 dark:bg-gray-950 border border-gray-300 dark:border-gray-800/50 p-6 rounded-lg font-mono text-sm min-h-[100px] flex flex-col justify-center">
-                <p className="text-green-600 dark:text-green-400 mb-1 flex items-center gap-1">
+            <div className="p-4 md:p-8 space-y-6 md:space-y-8 overflow-x-auto">
+              <div className="bg-gray-300 dark:bg-gray-950 border border-gray-300 dark:border-gray-800/50 p-4 md:p-6 rounded-lg font-mono text-sm min-h-25 flex flex-col justify-center overflow-x-auto">
+                <p className="text-green-600 dark:text-green-400 mb-1 flex items-center gap-1 whitespace-nowrap">
                   <span className="text-cyan-600 dark:text-cyan-400 mr-2">$</span>./init_secure_comms.sh
                 </p>
                 
