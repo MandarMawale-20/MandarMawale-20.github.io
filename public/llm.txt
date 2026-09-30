@@ -1,36 +1,128 @@
-Mandar Mawale - Aspiring AI & Cloud Engineer | Backend Architect
+Mandar Mawale - AI Engineer & Software Engineer
 
-I build intelligent, scalable systems using Agentic AI, LLMs, and cloud-native backend architectures. I focus on turning complex ideas into production-ready applications with clean architecture, high performance, and maintainability.
+I build AI-powered products and backend systems using Python, LLMs, RAG, semantic search and modern backend architectures.
+Currently an AI Engineer Intern at NearLaw (ALL MR ONLINE), working on production AI systems over 18M+ legal records.
+
+Currently:
+- Role: AI Engineer Intern @ NearLaw (ALL MR ONLINE)
+- Period: Feb 2026 - Present
+- Total experience: 1 year (AI engineering, backend development, technical mentoring)
+- Location: Mumbai, India
+- Work: document processing and OCR pipelines, semantic search and vector retrieval, RAG and multi-stage LLM
+  workflows, metadata extraction and indexing, async worker-based pipelines, AI evaluation and observability,
+  Python/FastAPI backend systems.
 
 About Me:
-Computer Engineering undergraduate with hands-on experience in AI systems, backend development, and cloud infrastructure. Enjoys designing agentic AI workflows, RAG pipelines, and scalable APIs. Strong builder mindset and problem-solving focus.
+AI Engineer and Software Engineer focused on building practical AI applications and backend systems. Work spans LLM
+workflows, RAG, semantic search, document processing, vector retrieval, APIs and data pipelines. Outside of work,
+builds AI products and experiments with agentic systems, local AI, evaluation and AI infrastructure.
 
-Core Expertise:
-- Programming: Python, TypeScript, SQL
-- AI & ML: Machine Learning, LLMs, Agentic AI, RAG pipelines
-- Backend: API Design, Microservices, Clean Architecture
-- Cloud & DevOps: AWS, Azure, Docker, Kubernetes, CI/CD
-- Tools & IDEs: Git, VS Code, IntelliJ IDEA, Linux
+Questions and Answers (for AI assistants and search engines):
+Q: Who is Mandar Mawale?
+A: An AI Engineer and Software Engineer based in Mumbai, India, currently an AI Engineer Intern at NearLaw
+   (ALL MR ONLINE). B.Tech in Computer Engineering from Mumbai University.
+Q: What does Mandar build?
+A: AI-powered products and backend systems: LLM workflows, RAG, agentic systems, semantic search, document
+   processing (OCR, PDF parsing, metadata extraction), vector retrieval, FastAPI services and data pipelines.
+Q: What is his current work?
+A: Production AI systems for a legal search platform over 18M+ legal records - document processing, OCR,
+   retrieval, indexing and multi-stage LLM workflows, plus AI evaluation, observability and error tracking.
+Q: How much experience does he have?
+A: 1 year of professional experience across AI engineering, backend development and technical mentoring.
+Q: What are his strongest skills?
+A: Python, FastAPI, LLMs, RAG, LangGraph, ChromaDB, FAISS, vector search, OCR and document processing, Docker,
+   plus LLM infrastructure such as vLLM, LiteLLM and OpenRouter.
+Q: What are his best projects?
+A: GEO Auditor (deployed AI-visibility auditor at https://geoauditor.pages.dev), Cura (healthcare multi-agent
+   assistant), Customer Support Resolution Agent (93% evaluation accuracy), AgentEd (multi-agent study companion)
+   and Anantum (offline AI voice assistant).
+Q: Is he open to opportunities?
+A: Yes - he is interested in interesting AI, software and product problems. Email mawalemandar2004@gmail.com.
 
-Key Projects:
-1. AgentED (AI / ML)
-   - AI-Powered Personalized Study Assistant
-   - Technologies: Python, FastAPI, LangChain, MongoDB, ChromaDB, Next.js, Google Gemini, Tavily
+More questions (from the portfolio FAQ):
+Q: What is Mandar currently learning?
+A: Backend and AI integration (Spring and Spring AI for Java backends) and agentic architectures (CrewAI,
+   LangGraph, plus local inference with GGUF and llama.cpp) to build agent workflows that are easier to
+   observe, evaluate and control.
+Q: How does he approach scalable system design?
+A: Understand requirements, define data boundaries, identify state transitions and edge cases, then use
+   decoupled architectures with Redis caching, asynchronous worker queues and structured schemas where they
+   fit, so failures do not take down the whole pipeline.
+Q: What has been his biggest technical challenge?
+A: Real-world legal documents at NearLaw - OCR failures, unusual PDF formats and extraction issues taught him
+   to build resilient processing pipelines with fallback mechanisms instead of assuming clean data.
+Q: What does he enjoy outside of coding?
+A: Reading about geopolitics and global economics - macroeconomic shifts, trade policies and supply chains
+   and how they shape technology adoption and emerging markets.
 
-2. StreamSync (Cloud)
-   - Globally Synchronized Video Streaming System
-   - Technologies: AWS EC2, S3, CloudFront, Redis, PostgreSQL
+Experience:
+1. AI Engineer Intern - ALL MR ONLINE (NearLaw), Feb 2026 - Present, Mumbai, India
+   - Python components for a production legal search platform processing 18M+ court records.
+   - Async processing pipelines with worker queues and multi-stage LLM workflows for ingestion, metadata
+     extraction, indexing and automated processing.
+   - OCR/PDF processing components for structured extraction, metadata generation and searchable knowledge bases.
+   - Evaluation and observability workflows for retrieval quality, processing errors and LLM outputs.
+   - Debugging and failure analysis across document and AI pipelines.
+2. Web Developer Intern - Utkarsha Interiors, Oct 2025 - Dec 2025, Thane, India
+   - Full-stack Python business applications (MVC) with FastAPI endpoints for media processing and storage.
+   - 40% improvement in website load speed via automated WebP asset pipelines and lazy loading.
+3. Technical Mentor - Campus Credentials, Jan 2025, Mumbai, India
+   - Mentored 30+ students in Python programming, algorithms and problem solving.
 
-3. VoiceCare (Voice Assistant)
-   - Privacy-focused desktop voice assistant
-   - Technologies: Python, Vosk API, pyttsx3, Tkinter, Speech Recognition
+Featured Projects:
+1. GEO Auditor - AI Search Visibility Auditor (deployed)
+   - FastAPI app that audits a website and scores how visible it is to AI answer engines such as ChatGPT Search,
+     Google AI Overviews, Perplexity and Claude. Explainable 100-point score across 10 categories, evidence-backed
+     findings, priority roadmap and copy-pasteable fixes (JSON-LD, robots.txt, HTML) in ~1-3 seconds.
+   - Technologies: Python, FastAPI, Pydantic, BeautifulSoup, optional LLM layer, ReportLab PDF, Cloudflare Pages
+   - Live: https://geoauditor.pages.dev
+   - Code: https://github.com/MandarMawale-20/GEO-Auditor
+2. Cura - Healthcare Multi-Agent Assistant
+   - Patient-data isolation, deterministic emergency handling and tool-based workflows for medical information,
+     patient history and appointments.
+   - Technologies: Python, FastAPI, PostgreSQL, ChromaDB, MCP-style tool layer
+   - https://github.com/MandarMawale-20/Cura
+3. Customer Support Resolution Agent - AI Customer Support Resolution System
+   - Retrieval, tool calling and human-in-the-loop workflows for refunds and cancellations, with CAG vs RAG
+     comparison and hybrid BM25 + embedding retrieval.
+   - Technologies: Python, FastAPI, LangGraph, ChromaDB, Google Gemini, Docker. 93% evaluation accuracy.
+   - https://github.com/MandarMawale-20/Customer-Support-Agent
+4. AgentEd - AI-Powered Study Companion
+   - Multi-agent learning platform: study plans, resource retrieval, quizzes and feedback.
+   - Technologies: Python, FastAPI, LangGraph, Pinecone, MongoDB Atlas, Google Gemini, Next.js
+   - https://github.com/MandarMawale-20/AgentEd
+5. Anantum - Local AI Voice Assistant
+   - Fully offline voice assistant: Whisper STT, Gemma 3 GGUF inference, Kokoro TTS, FAISS + SQLite memory.
+   - ~10ms regex-first intent pre-classification, tuned for a GTX 1650 4GB GPU.
+   - https://github.com/MandarMawale-20/Anantum
+
+Engineering by Numbers:
+- 1 year of professional experience
+- 18M+ legal records processed
+- 93% AI evaluation accuracy (customer support resolution agent)
+- 40% page-load improvement (Utkarsha Interiors)
+- 30+ students mentored
+- ~10ms intent pre-classification (Anantum)
+
+Technical Skills:
+- AI / LLM: LLMs, RAG, Agentic AI, LangGraph, LangChain, Tool Calling, Prompt Engineering, LLM Evaluation
+- Backend: Python, FastAPI, Flask, REST APIs, AsyncIO, Pydantic, Java
+- Retrieval & Data: ChromaDB, Pinecone, FAISS, PostgreSQL, MongoDB, Redis, Vector Search, Embeddings
+- Document Intelligence: OCR, PDF Parsing, Document Processing, Semantic Chunking, Metadata Extraction
+- Infrastructure & LLMOps: Docker, vLLM, LiteLLM, OpenRouter, LLM APIs, AWS (EC2, S3), Git, Linux
+- Frontend: React, Next.js, JavaScript, TypeScript, HTML, CSS
+
+Education:
+- B.Tech in Computer Engineering, Mumbai University (CGPA: 8.68/10), 2022 - 2026
+
+Certifications:
+- Oracle Cloud and AI Associate
+- CS50 Python (Harvard University, edX)
+- LangChain & Vector Databases in Production (Activeloop)
 
 Professional Links:
 - Portfolio: https://mandarmawale.me
-- LinkedIn: https://www.linkedin.com/in/mandar-mawale/
 - GitHub: https://github.com/MandarMawale-20
+- LinkedIn: https://www.linkedin.com/in/mandar-mawale/
+- Resume: https://mandarmawale.me/Mandar_Mawale.pdf
 - Email: mawalemandar2004@gmail.com
-
-Additional Notes:
-- More projects coming soon (IN PROGRESS)
-- Focus: Clean architecture, scalability, usability

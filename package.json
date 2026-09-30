@@ -6,11 +6,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npm run prerender",
+    "prerender": "vite build --config prerender/vite.config.ts --logLevel warn && node prerender/inject.mjs || echo [prerender] skipped - non-fatal, site still deploys",
     "preview": "vite preview"
   },
   "dependencies": {
-    "gsap": "^3.14.2",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-helmet-async": "^2.0.5",

@@ -1,7 +1,63 @@
+# robots.txt for mandarmawale.me
+# LLM-friendly summary: https://mandarmawale.me/llm.txt
+
 User-agent: *
 Allow: /
 Disallow: /node_modules/
 Disallow: /.git/
 
+# --- AI / answer-engine crawlers (explicitly allowed) ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
 Sitemap: https://mandarmawale.me/sitemap.xml
-LLM-Full-Content: https://mandarmawale.me/llm.txt
+
+Sitemap: https://mandarmawale.me/sitemap.xml

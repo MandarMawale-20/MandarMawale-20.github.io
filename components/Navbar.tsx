@@ -1,7 +1,6 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import type { SectionKey } from '../utils/seoConfig';
-import { MdTerminal, MdLightMode, MdDarkMode, MdDownload } from 'react-icons/md';
+import { MdLightMode, MdDarkMode, MdDownload, MdMenu, MdClose } from 'react-icons/md';
 
 interface NavbarProps {
   activeSection: SectionKey;
@@ -10,12 +9,17 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ activeSection, darkMode, setDarkMode }) => {
-  const navItems = [
-    { id: 'home', label: '//home' },
-    { id: 'skills', label: '//skills' },
-    { id: 'experience', label: '//experience' },
-    { id: 'projects', label: '//projects' },
-    { id: 'contact', label: '//contact' },
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const navItems: { id: SectionKey; label: string }[] = [
+    { id: 'home', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'metrics', label: 'Metrics' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'faq', label: 'FAQ' },
+    { id: 'contact', label: 'Contact' },
   ];
 
   const scrollTo = (id: string) => {
@@ -26,67 +30,107 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, darkMode, setDark
         behavior: 'smooth'
       });
     }
+    setMenuOpen(false);
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800/50 bg-[#f8fafc]/80 dark:bg-[#020617]/80 backdrop-blur-md px-6 py-4 lg:px-20 transition-colors">
+    <header
+      className="sticky top-0 z-50 w-full border-b border-[var(--border)] bg-[var(--bg)]/85 backdrop-blur-md px-6 py-3.5 lg:px-12 transition-colors"
+    >
       <div className="flex items-center justify-between mx-auto max-w-7xl">
-        <div 
+        {/* Linux Path Logo */}
+        <button
           onClick={() => scrollTo('home')}
-          className="flex items-center gap-4 text-slate-900 dark:text-white hover:text-[#00e5ff] transition-colors duration-300 cursor-pointer group"
+          className="flex items-center gap-1.5 font-mono text-left group"
+          aria-label="Navigate to Home"
         >
-          <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 group-hover:border-[#00e5ff]/50 transition-all">
-            <div className="text-[#00e5ff]">
-              <MdTerminal size={20} />
-            </div>
-          </div>
-          <div className="flex flex-col">
-            <h2 className="text-lg font-bold tracking-tight leading-none uppercase">Mandar Mawale</h2>
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono tracking-widest uppercase mt-1">AI Engineer</span>
-          </div>
-        </div>
+          <span className="text-[var(--text-strong)] font-bold text-base tracking-tight">
+            ~/mandar
+          </span>
+          <span className="inline-block w-1.5 h-3.5 bg-[var(--accent)]" />
+          <span className="hidden sm:inline-block text-[11px] text-[var(--faint)] font-mono ml-2 border-l border-[var(--border)] pl-2">
+            ai engineer
+          </span>
+        </button>
 
-        <nav className="hidden md:flex items-center gap-8">
+        {/* Desktop Nav */}
+        <nav aria-label="Primary" className="hidden lg:flex items-center gap-6">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className={`text-sm font-mono transition-all relative ${
-                activeSection === item.id 
-                  ? 'text-[#00e5ff] font-bold' 
-                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              aria-current={activeSection === item.id ? 'page' : undefined}
+              className={`text-xs font-mono uppercase tracking-wider transition-colors py-1 border-b-2 ${
+                activeSection === item.id
+                  ? 'text-[var(--text-strong)] font-semibold border-[var(--accent)]'
+                  : 'text-[var(--faint)] border-transparent hover:text-[var(--text)]'
               }`}
             >
               {item.label}
-              {activeSection === item.id && (
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#00e5ff] shadow-[0_0_8px_#00e5ff]" />
-              )}
             </button>
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
-          <button 
+        {/* Controls */}
+        <div className="flex items-center gap-3">
+          <button
             onClick={() => setDarkMode(!darkMode)}
-            className="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-[#00e5ff] hover:border-[#00e5ff]/30 transition-all"
-            title="Toggle Mode"
+            className="w-9 h-9 flex items-center justify-center rounded-md border border-[var(--border)] text-[var(--muted)] hover:text-[var(--text-strong)] hover:bg-[var(--surface-2)] hover:border-[var(--border-strong)] transition-colors"
+            title="Toggle theme"
+            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
           >
-            <div className="flex items-center justify-center">
-              {darkMode ? <MdLightMode size={20} /> : <MdDarkMode size={20} />}
-            </div>
+            {darkMode ? <MdLightMode size={16} /> : <MdDarkMode size={16} />}
           </button>
-          
-          <button 
+
+          <button
             onClick={() => scrollTo('resume')}
-            className="hidden sm:flex items-center gap-2 bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 border border-[#00e5ff]/30 hover:border-[#00e5ff] text-[#00e5ff] px-5 py-2 rounded-lg text-sm font-mono font-bold transition-all group"
+            className="hidden sm:flex items-center gap-1.5 btn-ghost !px-3.5 !py-1.5"
           >
-            <div className="flex-shrink-0">
-              <MdDownload size={18} />
-            </div>
-            <span>CV</span>
+            <MdDownload size={15} />
+            <span>cv.pdf</span>
+          </button>
+
+          <button
+            onClick={() => setMenuOpen((open) => !open)}
+            className="lg:hidden w-9 h-9 flex items-center justify-center rounded-md border border-[var(--border)] text-[var(--muted)] hover:bg-[var(--surface-2)] transition-colors"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          >
+            {menuOpen ? <MdClose size={18} /> : <MdMenu size={18} />}
           </button>
         </div>
       </div>
+
+      {menuOpen && (
+        <nav
+          id="mobile-nav"
+          aria-label="Mobile"
+          className="lg:hidden mt-3 pt-3 border-t border-[var(--border)] grid grid-cols-2 gap-2"
+        >
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              aria-current={activeSection === item.id ? 'page' : undefined}
+              className={`px-3 py-2 rounded-md text-xs font-mono text-left border transition-colors ${
+                activeSection === item.id
+                  ? 'border-[var(--accent)] bg-[var(--surface-2)] text-[var(--text-strong)] font-semibold'
+                  : 'border-[var(--border)] text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--text)]'
+              }`}
+            >
+              {item.label}
+            </button>
+          ))}
+          <button
+            onClick={() => scrollTo('resume')}
+            className="col-span-2 flex items-center justify-center gap-1.5 px-3 py-2 rounded-md text-xs font-mono border border-[var(--border)] text-[var(--text)] bg-[var(--surface-2)]"
+          >
+            <MdDownload size={15} />
+            <span>download cv.pdf</span>
+          </button>
+        </nav>
+      )}
     </header>
   );
 };

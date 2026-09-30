@@ -33,6 +33,15 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      # VITE_WEB3FORMS_KEY lives in repo secrets (it is gitignored locally via .env.local)
+      - name: Write build-time env
+        env:
+          VITE_WEB3FORMS_KEY: ${{ secrets.VITE_WEB3FORMS_KEY }}
+        run: printf 'VITE_WEB3FORMS_KEY=%s\n' "$VITE_WEB3FORMS_KEY" > .env
+
       - name: Build
         run: npm run build
 

@@ -1,29 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { usePageSEO } from './hooks/usePageSEO';
 import type { SectionKey } from './utils/seoConfig';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { Skills } from './components/Skills';
-import { ExperienceSection } from './components/Experience';
-import { ProjectsSection } from './components/Projects';
-import { ResumeSection } from './components/Resume';
-import { ContactSection } from './components/Contact';
-import { Footer } from './components/Footer';
-import { CLI } from './components/CLI';
-import { DataBackground } from './components/DataBackground';
+import { SectionSkeleton } from './components/common/SectionSkeleton';
+import { Reveal } from './components/common/Reveal';
+
+// 1. Code Splitting / Lazy Loading
+// Optimizing bundle size by splitting heavy sections into separate chunks.
+// Using explicit mapping for named exports.
+const Skills = lazy(() => import('./components/Skills').then(m => ({ default: m.Skills })));
+const AboutSection = lazy(() => import('./components/About').then(m => ({ default: m.AboutSection })));
+const ExperienceSection = lazy(() => import('./components/Experience').then(m => ({ default: m.ExperienceSection })));
+const ProjectsSection = lazy(() => import('./components/Projects').then(m => ({ default: m.ProjectsSection })));
+const MetricsSection = lazy(() => import('./components/Metrics').then(m => ({ default: m.MetricsSection })));
+const ResumeSection = lazy(() => import('./components/Resume').then(m => ({ default: m.ResumeSection })));
+const FAQSection = lazy(() => import('./components/Faq').then(m => ({ default: m.FaqSection })));
+const ContactSection = lazy(() => import('./components/Contact').then(m => ({ default: m.ContactSection })));
+const Footer = lazy(() => import('./components/Footer').then(m => ({ default: m.Footer })));
+const CLI = lazy(() => import('./components/CLI').then(m => ({ default: m.CLI })));
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<SectionKey>('home');
   const seoHead = usePageSEO(activeSection);
-  // Initialize theme based on time of day (Dark mode from 6 PM to 6 AM)
+  const themePersisted = useRef(false);
+  // Initialize theme: a stored preference wins, otherwise dark mode from 6 PM to 6 AM
   const [darkMode, setDarkMode] = useState(() => {
+    const stored = typeof window !== 'undefined' ? window.localStorage.getItem('theme') : null;
+    if (stored === 'dark') return true;
+    if (stored === 'light') return false;
     const hours = new Date().getHours();
     return hours < 6 || hours >= 18;
   });
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections: SectionKey[] = ['home', 'experience', 'skills', 'projects', 'resume', 'contact'];
+      const sections: SectionKey[] = ['home', 'about', 'experience', 'projects', 'metrics', 'skills', 'resume', 'faq', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -45,42 +57,98 @@ const App: React.FC = () => {
     } else {
       document.documentElement.classList.remove('dark');
     }
+
+    // Only persist explicit user choices, so the time-of-day default keeps working
+    if (themePersisted.current) {
+      window.localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+    }
+    themePersisted.current = true;
   }, [darkMode]);
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-900 dark:text-slate-200 transition-colors duration-1000 overflow-x-hidden">
+    <div className="min-h-screen bg-transparent text-[var(--text)] transition-colors duration-200 overflow-x-hidden">
       {seoHead}
-      <DataBackground />
+      <a href="#main" className="skip-link">Skip to content</a>
+      
       <Navbar activeSection={activeSection} darkMode={darkMode} setDarkMode={setDarkMode} />
       
-      <main className="relative z-10">
+      <main id="main" className="relative z-10">
         <section id="home">
           <Hero />
         </section>
 
-        <section id="experience" className="pt-24 pb-12 bg-slate-50/50 dark:bg-slate-950/20 transition-colors duration-1000">
-          <ExperienceSection />
-        </section>
+        <Suspense fallback={<SectionSkeleton />}>
+          <section id="about" className="section">
+            <Reveal>
+              <AboutSection />
+            </Reveal>
+          </section>
+        </Suspense>
 
-        <section id="skills" className="pt-24 pb-24">
-          <Skills />
-        </section>
+        <Suspense fallback={<SectionSkeleton />}>
+          <section id="experience" className="section">
+            <Reveal>
+              <ExperienceSection />
+            </Reveal>
+          </section>
+        </Suspense>
 
-        <section id="projects" className="pt-24 pb-24 bg-slate-50/50 dark:bg-slate-950/20 transition-colors duration-1000">
-          <ProjectsSection />
-        </section>
+        <Suspense fallback={<SectionSkeleton />}>
+          <section id="projects" className="section">
+            <Reveal>
+              <ProjectsSection />
+            </Reveal>
+          </section>
+        </Suspense>
 
-        <section id="resume" className="pt-24 pb-24">
-          <ResumeSection />
-        </section>
+        <Suspense fallback={<SectionSkeleton />}>
+          <section id="metrics" className="section">
+            <Reveal>
+              <MetricsSection />
+            </Reveal>
+          </section>
+        </Suspense>
 
-        <section id="contact" className="py-24 bg-slate-50/50 dark:bg-slate-950/20 transition-colors duration-1000">
-          <ContactSection />
-        </section>
+        <Suspense fallback={<SectionSkeleton />}>
+          <section id="skills" className="section">
+            <Reveal>
+              <Skills />
+            </Reveal>
+          </section>
+        </Suspense>
+
+        <Suspense fallback={<SectionSkeleton />}>
+          <section id="resume" className="section">
+            <Reveal>
+              <ResumeSection />
+            </Reveal>
+          </section>
+        </Suspense>
+
+        <Suspense fallback={<SectionSkeleton />}>
+          <section id="faq" className="section">
+            <Reveal>
+              <FAQSection />
+            </Reveal>
+          </section>
+        </Suspense>
+
+        <Suspense fallback={<SectionSkeleton />}>
+          <section id="contact" className="section">
+            <Reveal>
+              <ContactSection />
+            </Reveal>
+          </section>
+        </Suspense>
       </main>
 
-      <CLI />
-      <Footer />
+      <Suspense fallback={<div className="h-16 bg-[var(--surface-2)] border-t border-[var(--border)]" />}>
+        <Footer />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <CLI />
+      </Suspense>
     </div>
   );
 };

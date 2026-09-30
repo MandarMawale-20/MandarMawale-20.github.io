@@ -1,135 +1,137 @@
 import React from 'react';
-import { Experience } from '../types';
-import { MdCommit, MdCallSplit, MdLocationOn, MdChevronRight } from 'react-icons/md';
+import { MdLocationOn, MdDateRange } from 'react-icons/md';
+import { SectionHeader } from './common/SectionHeader';
+
+interface Experience {
+  id: string;
+  hash: string;
+  role: string;
+  company: string;
+  period: string;
+  location: string;
+  tags: string[];
+  achievements: string[];
+  active?: boolean;
+}
 
 export const ExperienceSection: React.FC = () => {
   const experiences: Experience[] = [
     {
       id: '1',
-      role: 'Web Developer Intern',
-      company: 'Utkarsha Interiors',
-      period: '2025 – 2026',
-      location: 'Full-Stack Development',
-      tags: ['Frontend', 'Backend', 'Database', 'Web Development'],
+      hash: '9a3f2d',
+      role: 'AI Engineer Intern',
+      company: 'ALL MR ONLINE (NearLaw)',
+      period: 'Feb 2026 – Present',
+      location: 'Mumbai, India',
+      tags: ['Python', 'FastAPI', 'RAG', 'LangGraph', 'ChromaDB', 'OCR', 'Vector Search'],
       achievements: [
-        'Developed and maintained company website features and customer request forms.',
-        'Implemented real-time forwarding of customer inquiries to marketing/PR teams.',
-        'Ensured efficient backend processing and database handling of website data.'
+        'Developed Python components for a production legal search platform processing 18M+ court records, working across document processing, semantic retrieval and LLM-based workflows.',
+        'Designed asynchronous processing pipelines using worker queues and multi-stage LLM workflows for document ingestion, metadata extraction, indexing and automated processing.',
+        'Built and tested OCR/PDF processing components for structured extraction, metadata generation and searchable knowledge bases across varied document formats.',
+        'Implemented evaluation and observability workflows to monitor retrieval quality, processing errors and LLM outputs.',
+        'Debugged and investigated failures across document and AI pipelines by reproducing issues, reviewing generated outputs and iterating on fixes to improve reliability.'
       ],
       active: true
     },
     {
       id: '2',
-      role: 'Trainee Intern & Python Mentor',
-      company: 'Campus Credentials',
-      period: '2025',
-      location: 'Campus Training Program',
-      tags: ['Python', 'Mentoring', 'Problem-Solving'],
+      hash: '5c1b8e',
+      role: 'Web Developer Intern',
+      company: 'Utkarsha Interiors',
+      period: 'Oct 2025 – Dec 2025',
+      location: 'Thane, India',
+      tags: ['Python', 'FastAPI', 'JavaScript', 'HTML', 'CSS', 'WebP'],
       achievements: [
-        'Completed a supervised campus recruitment training program.',
-        'Assisted students as a Python trainer and debugger.',
-        'Resolved multiple Python program issues, improving correctness and execution.'
+        'Engineered full-stack Python business applications using MVC architecture, building FastAPI endpoints for portfolio media processing and secure backend storage.',
+        'Optimized frontend performance, achieving a 40% improvement in website load speed through automated WebP asset pipelines and lazy loading.',
+        'Developed dynamic customer request forms with backend processing to forward enquiries to marketing teams reliably.'
+      ]
+    },
+    {
+      id: '3',
+      hash: '2e7f4a',
+      role: 'Technical Mentor',
+      company: 'Campus Credentials',
+      period: 'Jan 2025',
+      location: 'Mumbai, India',
+      tags: ['Python', 'Algorithms', 'Data Structures', 'Problem Solving'],
+      achievements: [
+        'Mentored 30+ students in Python programming, algorithms and problem solving through practical sessions and technical guidance.',
+        'Diagnosed and resolved algorithmic issues, improving student code correctness and execution times.'
       ]
     }
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-6">
-      <div className="font-mono bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg shadow-2xl overflow-hidden mb-12">
-        <div className="bg-gray-300 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-700 px-4 py-2 flex items-center justify-between">
-          <div className="flex gap-2">
-            <div className="h-3 w-3 rounded-full bg-[#ff5f56]"></div>
-            <div className="h-3 w-3 rounded-full bg-[#ffbd2e]"></div>
-            <div className="h-3 w-3 rounded-full bg-[#27c93f]"></div>
-          </div>
-          <div className="text-xs text-slate-500 font-mono tracking-wide uppercase">bash — log_viewer</div>
-          <div className="w-8"></div>
-        </div>
-        <div className="p-4 md:p-8">
-          <h2 className="text-2xl md:text-5xl font-black text-cyan-600 dark:text-cyan-400 mb-4 break-all">
-            ./experience_log.sh
-          </h2>
-          <div className="flex flex-wrap gap-2 text-xs md:text-sm font-mono text-gray-700 dark:text-slate-300 break-all">
-            <span className="text-green-600 dark:text-green-400">mandar@system</span>:<span className="text-cyan-600 dark:text-cyan-400">~/work_history</span>$
-            <span className="text-gray-900 dark:text-white"> grep -r "achievements" . --sort=date</span>
-          </div>
-        </div>
+    <div className="max-w-4xl mx-auto px-6">
+      <div className="mb-12">
+        <SectionHeader
+          cmd="git log --oneline --graph"
+          title="Experience History"
+          sub="Engineering production AI systems, asynchronous pipelines, and high-performance backend platforms."
+        />
       </div>
 
-      <div className="relative flex flex-col pl-4 md:pl-12">
-        <div className="absolute left-5 md:left-13 top-0 bottom-0 w-0.5 bg-gray-300 dark:bg-slate-800"></div>
-        
-        {experiences.map((exp, idx) => (
-          <div key={exp.id} className="relative mb-12 last:mb-0">
-            <div className="absolute -left-7 md:-left-15 top-2 flex items-center justify-center bg-transparent p-1 z-10">
-              <div className={exp.active ? "text-cyan-600 dark:text-[#00e5ff] drop-shadow-sm" : "text-gray-500 dark:text-slate-700"}>
-                {exp.active ? (
-                  <MdCommit size={32} />
-                ) : (
-                  <MdCallSplit size={32} />
-                )}
-              </div>
-            </div>
+      <div className="relative border-l border-[var(--border-strong)] ml-4 sm:ml-6 space-y-10">
+        {experiences.map((exp) => (
+          <div key={exp.id} className="relative pl-6 sm:pl-8 group">
+            {/* Git commit dot */}
+            <div
+              className={`absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full border-2 border-[var(--bg)] transition-colors ${
+                exp.active ? 'bg-[var(--ok)]' : 'bg-[var(--border-strong)]'
+              }`}
+            />
 
-            <div className="flex flex-col gap-2 mb-2 font-mono ml-4">
-              <div className="flex items-center gap-3">
-                <span className={`text-xs md:text-sm px-2 py-0.5 rounded border ${exp.active ? 'text-cyan-600 dark:text-cyan-400 border-cyan-500/30 bg-cyan-500/10' : 'text-gray-700 dark:text-slate-500 border-gray-400 dark:border-gray-600'}`}>
-                  [{exp.period}]
-                </span>
-              </div>
-            </div>
-
-            <div className={`bg-gray-200 dark:bg-gray-900 border rounded-lg p-6 md:p-8 ml-4 transition-all group hover:border-cyan-500/40 ${exp.active ? 'border-cyan-500/30 shadow-xl' : 'border-gray-300 dark:border-gray-700'}`}>
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-gray-300 dark:border-gray-700 pb-6">
+            <div className="panel p-5 sm:p-7 transition-colors group-hover:border-[var(--border-strong)]">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-4">
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">{exp.role}</h3>
-                  <p className="text-lg text-gray-700 dark:text-slate-400 font-mono">@{exp.company}</p>
-                </div>
-                <div className="flex items-center gap-1.5 text-xs text-gray-600 dark:text-slate-400 bg-gray-300 dark:bg-gray-800 px-3 py-1.5 rounded-full border border-gray-300 dark:border-gray-700">
-                  <div className="text-cyan-400">
-                    <MdLocationOn size={14} />
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-mono text-xs text-[var(--faint)]">
+                      commit {exp.hash}
+                    </span>
+                    {exp.active && (
+                      <span className="chip !text-[10px] !text-[var(--ok)] !border-[var(--ok)] uppercase tracking-wider">
+                        HEAD · active
+                      </span>
+                    )}
                   </div>
-                  <span className="font-mono">{exp.location}</span>
+                  <h3 className="text-lg font-bold text-[var(--text-strong)]">
+                    {exp.role}
+                  </h3>
+                  <p className="text-sm font-medium text-[var(--text)] font-mono">
+                    {exp.company}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap sm:flex-col items-start sm:items-end gap-1.5 text-xs font-mono text-[var(--faint)]">
+                  <div className="flex items-center gap-1">
+                    <MdDateRange size={14} />
+                    <span>{exp.period}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <MdLocationOn size={14} />
+                    <span>{exp.location}</span>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-2 mb-8">
+              <div className="flex flex-wrap gap-1.5 mb-5">
                 {exp.tags.map(tag => (
-                  <span key={tag} className="px-3 py-1 rounded bg-gray-300 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-[10px] md:text-xs font-mono text-gray-600 dark:text-slate-400 group-hover:border-cyan-500/30 transition-colors">
-                    --{tag}
-                  </span>
+                  <span key={tag} className="chip !text-[10px]">{tag}</span>
                 ))}
               </div>
 
-              <div className="space-y-4 font-mono text-sm md:text-base text-gray-700 dark:text-slate-400">
-                <p className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 font-bold">
-                  <div className="shrink-0">
-                    <MdChevronRight size={14} />
-                  </div>
-                  cat ./achievements.txt
-                </p>
-                <div className="pl-6 border-l border-gray-300 dark:border-gray-700 space-y-4">
-                  {exp.achievements.map((achievement, i) => (
-                    <div key={i} className="flex gap-4">
-                      <span className="text-gray-600 dark:text-slate-600 select-none">0{i + 1}</span>
-                      <p className="leading-relaxed text-gray-700 dark:text-slate-300">
-                        {achievement}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <ul className="space-y-2 text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
+                {exp.achievements.map((achievement, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="text-[var(--ok)] shrink-0 font-mono mt-0.5">&gt;</span>
+                    <span>{achievement}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         ))}
-        
-        <div className="mt-8 ml-4 flex items-center py-4">
-          <div className="font-mono text-lg text-slate-500">
-            <span className="text-green-500">mandar@system</span>:<span className="text-cyan-400">~/work_history</span>$ 
-            <span className="text-slate-900 dark:text-white"> cd ../skills</span>
-            <span className="blinking-cursor"></span>
-          </div>
-        </div>
       </div>
     </div>
   );

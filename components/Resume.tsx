@@ -1,13 +1,12 @@
 import React from 'react';
-import { Terminal } from './Terminal';
-import { MdDownload, MdWifiTethering, MdLock, MdIntegrationInstructions } from 'react-icons/md';
+import { MdDownload, MdSchool, MdWorkspacePremium, MdWorkOutline } from 'react-icons/md';
+import { SectionHeader } from './common/SectionHeader';
 
 export const ResumeSection: React.FC = () => {
   const handleCVDownload = () => {
-    // Create a link element and trigger download
     const link = document.createElement('a');
-    link.href = '/Mandar_Mawale_CV_2026.pdf';
-    link.download = 'Mandar_Mawale_CV_2026.pdf';
+    link.href = '/Mandar_Mawale.pdf';
+    link.download = 'Mandar_Mawale.pdf';
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     document.body.appendChild(link);
@@ -16,85 +15,62 @@ export const ResumeSection: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-6">
-      <div className="flex flex-col gap-6 md:flex-row md:justify-between md:items-end border-b border-slate-200 dark:border-slate-800 pb-12 mb-12">
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse shadow-[0_0_8px_cyan]"></span>
-            <span className="text-cyan-600 dark:text-cyan-400 text-xs font-mono uppercase tracking-widest">Information Retrieval Protocol</span>
+    <div className="max-w-5xl mx-auto px-6">
+      <div className="panel p-8 md:p-12 relative overflow-hidden">
+        <div className="flex flex-col md:flex-row gap-12 items-center justify-between relative z-10">
+          <div className="space-y-6 flex-1 text-center md:text-left">
+            <SectionHeader
+              cmd="cat resume.pdf"
+              title="Curriculum Vitae"
+              sub="A one-page summary of my experience building production AI systems, backend services and AI products."
+            />
+
+            <div className="pt-2 flex justify-center md:justify-start">
+              <button onClick={handleCVDownload} className="btn-ink !px-8 !py-3.5">
+                <MdDownload size={18} />
+                <span>Download Full CV (PDF)</span>
+              </button>
+            </div>
           </div>
-          <h2 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-tight">
-            ENGINEERING  <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-500 dark:to-cyan-400">DOSSIER</span>
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl font-light">
-            Download the comprehensive dossier containing my engineering specifications, professional history, and full technical stack.
-          </p>
-        </div>
 
-        <div className="shrink-0">
-          <button 
-            onClick={handleCVDownload}
-            className="w-full md:w-auto flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-6 md:py-6 md:px-10 rounded-xl transition-all shadow-xl group md:scale-110 md:origin-right active:scale-100"
-          >
-            <div className="group-hover:animate-bounce">
-              <MdDownload size={24} />
-            </div>
-            <span>DOWNLOAD CV (PDF)</span>
-          </button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        {[
-          { icon: MdWifiTethering, title: 'Connection', val: 'SECURE', sub: ':: VERIFIED ::' },
-          { icon: MdLock, title: 'Encryption', val: 'AES-256', sub: ':: 128-BIT ::' },
-          { icon: MdIntegrationInstructions, title: 'Version', val: 'v4.2.0', sub: 'UPDATE: 24H AGO' }
-        ].map((item, i) => {
-          const IconComponent = item.icon;
-          return (
-            <div key={i} className="bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 p-6 rounded-lg relative overflow-hidden group hover:border-blue-500/50 transition-all shadow-md">
-              <div className="absolute -right-2 -top-2 text-gray-400 dark:text-gray-800 group-hover:text-blue-500/10 transition-colors">
-                <IconComponent size={96} />
-              </div>
-              <p className="text-gray-700 dark:text-slate-500 font-mono text-[10px] uppercase tracking-widest mb-1">{item.title}</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{item.val}</p>
-              <p className="text-[10px] font-mono text-gray-600 dark:text-slate-600 mt-4">{item.sub}</p>
-            </div>
-          );
-        })}
-      </div>
-
-      <Terminal title="guest@mandar-ai:~/downloads" headerIcon="lock" className="min-h-87.5">
-        <div className="flex flex-col lg:flex-row h-full">
-          <div className="grow p-4 md:p-8 space-y-6">
-            <div className="space-y-2">
-              <p className="flex flex-wrap items-center gap-2">
-                <span className="text-blue-600 dark:text-blue-400">➜</span>
-                <span className="text-cyan-600 dark:text-cyan-400">~</span>
-                <span className="text-gray-900 dark:text-white font-bold break-all">./initiate_transfer.sh --target=resume</span>
-              </p>
-              <div className="pl-4 border-l border-gray-300 dark:border-gray-700 space-y-1 text-xs">
-                <p className="text-gray-600 dark:text-slate-500">[10:42:01] <span className="text-gray-800 dark:text-slate-300">Establishing handshake...</span></p>
-                <p className="text-gray-600 dark:text-slate-500">[10:42:02] <span className="text-gray-800 dark:text-slate-300">Authenticating user credentials... <span className="text-green-600 dark:text-green-400 font-bold">OK</span></span></p>
-              </div>
-            </div>
-
-            <div className="bg-gray-300 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 p-4 md:p-6 rounded text-xs space-y-2 max-w-md shadow-sm overflow-hidden">
-              <div className="grid grid-cols-[80px_1fr] md:grid-cols-[100px_1fr] gap-x-2">
-                <span className="text-gray-700 dark:text-slate-500 uppercase">FILE:</span>
-                <span className="text-gray-900 dark:text-white break-all">Mandar_Mawale_CV_2026.pdf</span>
-                <span className="text-gray-700 dark:text-slate-500 uppercase">STATUS:</span>
-                <span className="text-green-600 dark:text-green-400 font-bold break-all">READY_FOR_HANDSHAKE</span>
-              </div>
-            </div>
-
-            <p className="flex items-center gap-1 text-gray-700 dark:text-slate-500 pt-4 italic">
-              Terminal sequence idle... Waiting for interaction
-              <span className="blinking-cursor"></span>
-            </p>
+          <div className="w-full md:w-auto flex flex-col gap-3 shrink-0">
+            {[
+              {
+                icon: MdWorkOutline,
+                title: 'Current Role',
+                subtitle: 'AI Engineer Intern',
+                detail: 'NearLaw (ALL MR ONLINE) · Feb 2026 – Present'
+              },
+              {
+                icon: MdSchool,
+                title: 'Education',
+                subtitle: 'B.Tech in Computer Engineering',
+                detail: 'Mumbai University (CGPA: 8.68/10)'
+              },
+              {
+                icon: MdWorkspacePremium,
+                title: 'Certifications',
+                subtitle: 'Oracle Cloud & AI Associate',
+                detail: 'CS50 Python, LangChain & Vector Databases'
+              }
+            ].map((item, i) => {
+              const IconComponent = item.icon;
+              return (
+                <div key={i} className="flex items-center gap-4 bg-[var(--surface-2)] p-4 rounded-lg border border-[var(--border)]">
+                  <div className="w-11 h-11 rounded-md bg-[var(--surface)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--accent)] shrink-0">
+                    <IconComponent size={20} />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm font-bold text-[var(--text-strong)]">{item.title}</p>
+                    <p className="text-xs text-[var(--muted)] font-medium">{item.subtitle}</p>
+                    <p className="text-[10px] font-mono text-[var(--faint)] mt-0.5">{item.detail}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </Terminal>
+      </div>
     </div>
   );
 };

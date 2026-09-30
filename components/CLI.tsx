@@ -48,9 +48,9 @@ export const CLI: React.FC = () => {
       setHistory(prev => [...prev,
         '-------------------------------------------------',
         'IDENTITY: Mandar Mawale',
-        'ROLE: Aspiring AI & Cloud Engineer',
-        'LOC: India / Remote',
-        'BIO: I build intelligent, scalable systems using Agentic AI, LLMs, and cloud-native backend architectures. Focused on turning complex ideas into production-ready applications.',
+        'ROLE: AI Engineer & Software Engineer',
+        'LOC: Mumbai, India',
+        'BIO: I build AI-powered products and backend systems using Python, LLMs, RAG, semantic search and modern backend architectures.',
         '-------------------------------------------------'
       ]);
     } else if (cmd === 'cat resume.txt' || cmd === 'resume') {
@@ -59,9 +59,10 @@ export const CLI: React.FC = () => {
         '-------------------------------------------------',
         'MANDAR MAWALE - RESUME SUMMARY',
         '-------------------------------------------------',
-        '* Web Developer Intern @ Utkarsha Interiors (2025–2026): Built and maintained web features, optimized backend and data flow.',
-        '* Trainee Intern & Python Mentor @ Campus Credentials (2025): Led Python training and solved coding issues for students.',
-        '* SKILLS: AI/LLM (LangChain, Gemini), Backend (FastAPI, Flask), Cloud (AWS, Oracle), Databases (PostgreSQL, MongoDB), ML (scikit-learn), DevOps (Git, Linux)',
+        '* AI Engineer Intern @ ALL MR ONLINE (NearLaw) (Feb 2026 - Present): production AI systems over 18M+ legal records - document processing, OCR, retrieval and multi-stage LLM workflows.',
+        '* Web Developer Intern @ Utkarsha Interiors (Oct 2025 - Dec 2025): full-stack Python/FastAPI apps and a 40% page-load improvement.',
+        '* Technical Mentor @ Campus Credentials (Jan 2025): mentored 30+ students in Python, algorithms and problem solving.',
+        '* SKILLS: AI/LLM (LLMs, RAG, LangGraph, LangChain, LLM Evaluation), Backend (Python, FastAPI, REST APIs), Retrieval & Data (ChromaDB, Pinecone, FAISS, PostgreSQL, MongoDB, Redis), Document AI (OCR, PDF Parsing), Infrastructure (Docker, vLLM, LiteLLM)',
         '-------------------------------------------------',
         'Type //resume to download the full PDF version.'
       ]);
@@ -93,8 +94,8 @@ export const CLI: React.FC = () => {
           break;
         case '//help':
         case 'help':
-          setHistory(prev => [...prev, 
-            'COMMANDS:', 
+          setHistory(prev => [...prev,
+            'COMMANDS:',
             '  ls             - List directory contents',
             '  whoami         - Display user profile',
             '  cat resume.txt - Print text resume',
@@ -120,40 +121,55 @@ export const CLI: React.FC = () => {
   return (
     <div className="fixed bottom-6 right-6 z-[100] font-mono">
       {isOpen ? (
-        <div className="w-[320px] md:w-[500px] h-[350px] bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-          <div className="bg-gray-100 dark:bg-gray-800 px-4 py-2 border-b border-gray-300 dark:border-gray-700 flex items-center justify-between select-none">
-            <div className="flex items-center gap-2">
-              <div className="text-cyan-400">
-                <MdTerminal size={14} />
-              </div>
-              <span className="text-[10px] text-gray-600 dark:text-slate-400 font-bold uppercase tracking-widest">Mandar_Terminal_v1.2</span>
-            </div>
-            <div className="flex gap-2">
-              <button onClick={() => setIsOpen(false)} className="w-3 h-3 rounded-full bg-[#ffbd2e]"></button>
-              <button onClick={() => setIsOpen(false)} className="w-3 h-3 rounded-full bg-[#ff5f56]"></button>
-            </div>
+        <div className="w-[320px] md:w-[500px] h-[350px] bg-[var(--surface)] border border-[var(--border-strong)] rounded-lg shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <div className="term-bar">
+            <span className="flex gap-1.5 flex-none">
+              <span className="term-dot" style={{ backgroundColor: '#ea6962' }} />
+              <span className="term-dot" style={{ backgroundColor: '#d8a657' }} />
+              <span className="term-dot" style={{ backgroundColor: '#a9b665' }} />
+            </span>
+            <span className="text-[10px] text-[var(--faint)] font-bold uppercase tracking-widest flex-1 min-w-0 truncate">
+              Mandar_Terminal_v1.2
+            </span>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-[var(--faint)] hover:text-[var(--accent)] text-xs flex-none px-1"
+              aria-label="Close terminal"
+            >
+              ✕
+            </button>
           </div>
-          
-          <div ref={scrollRef} className="flex-grow p-4 overflow-y-auto space-y-1 text-xs scrollbar-hide">
+
+          <div ref={scrollRef} className="flex-grow p-4 overflow-y-auto space-y-1 text-xs bg-[var(--surface-2)]">
             {history.map((line, i) => (
-              <div key={i} className={line.startsWith('visitor') ? 'text-gray-900 dark:text-white font-bold' : 'text-cyan-600 dark:text-cyan-400/90'}>
+              <div
+                key={i}
+                className={
+                  line.startsWith('visitor')
+                    ? 'text-[var(--text-strong)] font-bold'
+                    : 'text-[var(--muted)]'
+                }
+              >
                 {line}
               </div>
             ))}
             <div className="flex items-center flex-wrap">
-              <span className="text-green-600 dark:text-green-400 font-bold mr-2">visitor@mandar-pc:~$</span>
-              <span className="text-gray-900 dark:text-white break-all">{input}</span>
+              <span className="text-[var(--accent)] font-bold mr-2">visitor@mandar-pc:~$</span>
+              <span className="text-[var(--text-strong)] break-all">{input}</span>
               <span className="blinking-cursor"></span>
             </div>
           </div>
 
-          <form onSubmit={handleCommand} className="p-4 bg-gray-200 dark:bg-gray-900 border-t border-gray-300 dark:border-gray-800 flex items-center">
+          <form onSubmit={handleCommand} className="p-4 bg-[var(--surface)] border-t border-[var(--border)] flex items-center">
+            <label htmlFor="cli-input" className="sr-only">Terminal Command</label>
             <input
+              id="cli-input"
               ref={inputRef}
               type="text"
+              name="cli-command"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="bg-transparent border-none outline-none text-gray-900 dark:text-white text-xs flex-grow font-mono"
+              className="bg-transparent border-none outline-none text-[var(--text-strong)] text-xs flex-grow font-mono"
               spellCheck={false}
               autoComplete="off"
               placeholder="Enter command..."
@@ -163,15 +179,10 @@ export const CLI: React.FC = () => {
       ) : (
         <button
           onClick={() => setIsOpen(true)}
-          className="w-14 h-14 bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-xl flex items-center justify-center text-cyan-600 dark:text-cyan-400 shadow-xl hover:scale-105 transition-all group"
+          aria-label="Open terminal"
+          className="w-14 h-14 btn-ink !rounded-lg !p-0 !border-[var(--accent)] relative shadow-lg hover:-translate-y-0.5"
         >
-          <div className="text-cyan-600 dark:text-cyan-400">
-            <MdTerminal size={32} />
-          </div>
-          <span className="absolute -top-1 -right-1 flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
-          </span>
+          <MdTerminal size={24} className="text-[var(--accent)]" />
         </button>
       )}
     </div>

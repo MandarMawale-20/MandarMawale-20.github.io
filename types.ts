@@ -2,13 +2,18 @@
 export interface Project {
   id: string;
   title: string;
+  subtitle?: string;
   category: string;
   description: string;
   tags: string[];
   status: 'LIVE' | 'DEV' | 'PRIVATE' | 'DOCS' | 'PAPER';
   image: string;
+  imageAlt?: string;
   sourceUrl?: string;
   demoUrl?: string;
+  metric?: string;
+  highlights?: string[];
+  architecture?: string[];
 }
 
 export interface Experience {

@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { MdMail, MdHub, MdCode, MdArrowForward, MdCheckCircle, MdSend, MdHourglassTop } from 'react-icons/md';
+import { MdMail, MdHub, MdCode, MdArrowForward, MdCheckCircle, MdHourglassTop, MdContentCopy, MdCheck, MdErrorOutline, MdDescription } from 'react-icons/md';
+import { SectionHeader } from './common/SectionHeader';
+
+const inputClass =
+  'w-full bg-[var(--surface-2)] border border-[var(--border)] rounded-lg px-4 py-3 text-[var(--text-strong)] font-mono text-sm placeholder-[var(--faint)] focus:border-[var(--accent)] outline-none transition-colors';
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -10,25 +14,34 @@ export const ContactSection: React.FC = () => {
 
   const [status, setStatus] = useState<'IDLE' | 'SENDING' | 'SUCCESS' | 'ERROR'>('IDLE');
   const [errors, setErrors] = useState<string[]>([]);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const handleCopy = (e: React.MouseEvent, text: string, id: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
+  };
 
   const validate = () => {
     const newErrors: string[] = [];
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!formData.name.trim()) {
-      newErrors.push("ERR_NULL_USER: 'Name' field cannot be empty.");
+      newErrors.push("Please enter your name.");
     }
-    
+
     if (!formData.email.trim()) {
-      newErrors.push("ERR_NULL_ADDR: 'Email' field is required for handshake.");
+      newErrors.push("Please provide an email address.");
     } else if (!emailRegex.test(formData.email)) {
-      newErrors.push("ERR_INVALID_PROTO: Email format is unrecognized.");
+      newErrors.push("Please enter a valid email address.");
     }
-    
+
     if (!formData.message.trim()) {
-      newErrors.push("ERR_NULL_BODY: 'Message' content missing from payload.");
+      newErrors.push("Please enter a message.");
     } else if (formData.message.trim().length < 10) {
-      newErrors.push("ERR_SHORT_BODY: Message must be at least 10 characters.");
+      newErrors.push("Your message must be at least 10 characters long.");
     }
 
     setErrors(newErrors);
@@ -48,10 +61,10 @@ export const ContactSection: React.FC = () => {
     try {
       // Using Web3Forms API for secure email transmission (free, no backend needed)
       const webFormKey = import.meta.env.VITE_WEB3FORMS_KEY;
-      
+
       if (!webFormKey) {
         setStatus('ERROR');
-        setErrors(['ERR_CONFIG: Web3Forms key not configured. See SECURE_EMAIL_SETUP.md']);
+        setErrors(['Form configuration error. Please try reaching out directly via email.']);
         return;
       }
 
@@ -61,7 +74,7 @@ export const ContactSection: React.FC = () => {
       formPayload.append('email', formData.email);
       formPayload.append('message', formData.message);
       formPayload.append('from_name', formData.name);
-      formPayload.append('subject', `New Message from ${formData.name}`);
+      formPayload.append('subject', `New Inquiry from ${formData.name}`);
       formPayload.append('redirect', window.location.href);
 
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -77,7 +90,7 @@ export const ContactSection: React.FC = () => {
       }
     } catch (err) {
       setStatus('ERROR');
-      setErrors(['ERR_CONN_TIMEOUT: Failed to transmit data to remote host.']);
+      setErrors(['Failed to send message. Please try again later or email me directly.']);
     }
   };
 
@@ -88,176 +101,180 @@ export const ContactSection: React.FC = () => {
     }));
   };
 
+  const contactLinks: {
+    id: string;
+    label: string;
+    val: string;
+    icon: React.ElementType;
+    href: string;
+    copyable?: boolean;
+    download?: boolean;
+  }[] = [
+    { id: 'email', label: 'Email Address', val: 'mawalemandar2004@gmail.com', icon: MdMail, href: 'mailto:mawalemandar2004@gmail.com?subject=Connection%20Request', copyable: true },
+    { id: 'linkedin', label: 'LinkedIn Profile', val: 'linkedin.com/in/mandar-mawale', icon: MdHub, href: 'https://www.linkedin.com/in/mandar-mawale/', copyable: true },
+    { id: 'github', label: 'GitHub Repository', val: 'github.com/MandarMawale-20', icon: MdCode, href: 'https://github.com/MandarMawale-20', copyable: true },
+    { id: 'resume', label: 'Resume (PDF)', val: 'Mandar_Mawale.pdf', icon: MdDescription, href: '/Mandar_Mawale.pdf', download: true }
+  ];
+
   return (
     <div className="max-w-7xl mx-auto px-6">
-      <div className="mb-20 text-center max-w-3xl mx-auto">
-        <h2 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white mb-6">Let's Connect</h2>
-        <p className="text-xl text-gray-700 dark:text-slate-400 leading-relaxed">
-          I'm always open to discussing new roles, project collaborations, or just geeking out about the latest in AI and backend architecture. Reach out through my terminal or direct links.
-        </p>
+      <div className="mb-12">
+        <SectionHeader
+          cmd="./contact.sh --open"
+          title="Let's Connect"
+          sub="Have a problem worth building? I am always interested in interesting AI, software and product problems."
+        />
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8 md:gap-16 lg:gap-24 items-start">
-        <div className="space-y-6 md:space-y-12 lg:sticky lg:top-32">
-          <div className="space-y-3 md:space-y-4">
-            {[
-              { label: 'Protocol: SMTP', val: 'mawalemandar2004@gmail.com', icon: MdMail, href: 'mailto:mawalemandar2004@gmail.com?subject=Connection%20Request' },
-              { label: 'Network: LinkedIn', val: '/in/mandar-mawale', icon: MdHub, href: 'https://www.linkedin.com/in/mandar-mawale/' },
-              { label: 'Repository: GitHub', val: '@MandarMawale-20', icon: MdCode, href: 'https://github.com/MandarMawale-20' }
-            ].map((contact, i) => {
-              const IconComponent = contact.icon;
-              const isMailto = contact.href.startsWith('mailto:');
-              return (
-                <a
-                  key={i}
-                  href={contact.href}
-                  target={isMailto ? undefined : '_blank'}
-                  rel={isMailto ? undefined : 'noopener noreferrer'}
-                  className="group flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0 p-4 md:p-5 bg-gray-200 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-300 dark:border-gray-700 hover:border-cyan-500/50 rounded-xl transition-all shadow-xl"
-                >
-                  <div className="flex items-center gap-3 md:gap-6 min-w-0">
-                    <div className="w-12 md:w-14 h-12 md:h-14 shrink-0 rounded-lg bg-gray-300 dark:bg-gray-950 flex items-center justify-center border border-gray-300 dark:border-gray-800 group-hover:border-cyan-500/50 text-gray-600 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-all">
-                      <IconComponent size={20} className="md:w-6 md:h-6" />
-                    </div>
-                    <div className="flex flex-col gap-1 min-w-0">
-                      <span className="text-[10px] text-cyan-600 dark:text-cyan-400 font-mono uppercase tracking-widest">{contact.label}</span>
-                      <span className="text-gray-900 dark:text-white font-medium text-sm md:text-lg group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors truncate md:truncate-none">{contact.val}</span>
-                    </div>
+      <div className="grid lg:grid-cols-2 gap-8 items-start max-w-5xl mx-auto">
+        <div className="space-y-3">
+          {contactLinks.map((contact, i) => {
+            const IconComponent = contact.icon;
+            const isMailto = contact.href.startsWith('mailto:');
+            return (
+              <a
+                key={i}
+                href={contact.href}
+                download={contact.download ? contact.val : undefined}
+                target={isMailto ? undefined : '_blank'}
+                rel={isMailto ? undefined : 'noopener noreferrer'}
+                className="group flex items-center justify-between p-4 panel hover:border-[var(--accent)] transition-colors"
+              >
+                <div className="flex items-center gap-4 min-w-0">
+                  <div className="w-11 h-11 shrink-0 rounded-md bg-[var(--surface-2)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)] transition-colors">
+                    <IconComponent size={20} />
                   </div>
-                  <div className="text-gray-600 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 group-hover:translate-x-1 transition-all shrink-0">
-                    <MdArrowForward size={18} className="md:w-5 md:h-5" />
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-[10px] font-mono font-semibold text-[var(--faint)] uppercase tracking-wider">
+                      {contact.label}
+                    </span>
+                    <span className="text-[var(--text-strong)] font-bold text-sm md:text-base truncate">
+                      {contact.val}
+                    </span>
                   </div>
-                </a>
-              );
-            })}
-          </div>
+                </div>
+                <div className="flex items-center gap-1 shrink-0">
+                  {contact.copyable && (
+                    <button
+                      onClick={(e) => handleCopy(e, contact.val, contact.id)}
+                      className="p-2 text-[var(--faint)] hover:text-[var(--accent)] transition-colors"
+                      title="Copy to clipboard"
+                      aria-label={`Copy ${contact.label}`}
+                    >
+                      {copiedId === contact.id
+                        ? <MdCheck size={18} className="text-[var(--ok)]" />
+                        : <MdContentCopy size={18} />}
+                    </button>
+                  )}
+                  <div className="p-2 text-[var(--faint)] group-hover:text-[var(--accent)] group-hover:translate-x-0.5 transition-all">
+                    <MdArrowForward size={18} />
+                  </div>
+                </div>
+              </a>
+            );
+          })}
         </div>
 
-        <div className="relative group">
-          <div className="absolute -inset-1 bg-linear-to-b from-cyan-500/20 to-transparent rounded-2xl blur-md opacity-30 group-hover:opacity-60 transition duration-1000"></div>
-          <div className="relative bg-gray-200 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-2xl overflow-hidden shadow-2xl">
-            <div className="bg-gray-300 dark:bg-gray-800 px-6 py-4 border-b border-gray-300 dark:border-gray-700 flex items-center justify-between">
-              <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+        <div className="panel p-6 md:p-8">
+          {status === 'SUCCESS' ? (
+            <div role="status" aria-live="polite" className="flex flex-col items-center justify-center h-full py-12 text-center space-y-4 animate-in fade-in zoom-in duration-300">
+              <div className="w-16 h-16 bg-[var(--surface-2)] border border-[var(--ok)] text-[var(--ok)] rounded-lg flex items-center justify-center">
+                <MdCheckCircle size={36} />
               </div>
-              <div className="text-[10px] text-gray-600 dark:text-slate-400 font-mono tracking-wide uppercase">root@mandar-portfolio:~/contact</div>
+              <h3 className="text-2xl font-bold text-[var(--text-strong)]">Message Sent!</h3>
+              <p className="text-[var(--muted)]">
+                Thank you for reaching out. I'll get back to you as soon as possible.
+              </p>
+              <button onClick={() => setStatus('IDLE')} className="btn-ghost mt-4">
+                Send Another Message
+              </button>
             </div>
-            
-            <div className="p-4 md:p-8 space-y-6 md:space-y-8 overflow-x-auto">
-              <div className="bg-gray-300 dark:bg-gray-950 border border-gray-300 dark:border-gray-800/50 p-4 md:p-6 rounded-lg font-mono text-sm min-h-25 flex flex-col justify-center overflow-x-auto">
-                <p className="text-green-600 dark:text-green-400 mb-1 flex items-center gap-1 whitespace-nowrap">
-                  <span className="text-cyan-600 dark:text-cyan-400 mr-2">$</span>./init_secure_comms.sh
-                </p>
-                
-                {status === 'IDLE' && (
-                  <p className="text-gray-700 dark:text-slate-500">
-                    Establishing encrypted handshake... [WAITING]
-                    <span className="blinking-cursor"></span>
-                  </p>
-                )}
-                
-                {status === 'SENDING' && (
-                  <div className="space-y-1">
-                    <p className="text-cyan-600 dark:text-cyan-400">Transmitting payload to remote gateway...</p>
-                    <div className="w-full bg-gray-300 dark:bg-gray-800 h-1 rounded overflow-hidden mt-2">
-                      <div className="h-full bg-cyan-500 animate-[shimmer_2s_infinite] w-full"></div>
-                    </div>
-                  </div>
-                )}
-
-                {status === 'ERROR' && (
-                  <div className="space-y-1">
-                    {errors.map((err, i) => (
-                      <p key={i} className="text-red-400 flex items-center gap-2">
-                        <MdMail size={14} />
-                        {err}
-                      </p>
-                    ))}
-                  </div>
-                )}
-
-                {status === 'SUCCESS' && (
-                  <div className="space-y-1">
-                    <p className="text-green-400 font-bold flex items-center gap-2">
-                      <MdCheckCircle size={14} />
-                      [OK] Handshake successful. Message transmitted.
+          ) : (
+            <form className="space-y-6" onSubmit={handleSubmit} noValidate>
+              {status === 'ERROR' && (
+                <div
+                  id="form-errors"
+                  role="alert"
+                  aria-live="assertive"
+                  className="p-4 bg-[var(--surface-2)] border border-[var(--danger)] rounded-lg space-y-2"
+                >
+                  {errors.map((err, i) => (
+                    <p key={i} className="text-sm text-[var(--danger)] flex items-center gap-2 font-medium">
+                      <MdErrorOutline size={16} />
+                      {err}
                     </p>
-                    <p className="text-slate-500 text-xs">Awaiting response from system admin...</p>
-                    <button 
-                      onClick={() => setStatus('IDLE')}
-                      className="mt-4 text-cyan-400 text-xs underline uppercase tracking-widest font-bold"
-                    >
-                      &gt; RESTART_COMMS
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {status !== 'SUCCESS' && (
-                <form className="space-y-6" onSubmit={handleSubmit} noValidate>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-cyan-400 text-[10px] font-mono uppercase tracking-widest font-bold">Name</label>
-                      <input 
-                        type="text" 
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Mandar Mawale" 
-                        className="w-full bg-gray-300 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 text-gray-900 dark:text-white placeholder-gray-600 dark:placeholder-slate-600 font-mono text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-cyan-400 text-[10px] font-mono uppercase tracking-widest font-bold">Email</label>
-                      <input 
-                        type="email" 
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="engineer@domain.com" 
-                        className="w-full bg-gray-300 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 text-gray-900 dark:text-white placeholder-gray-600 dark:placeholder-slate-600 font-mono text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-cyan-400 text-[10px] font-mono uppercase tracking-widest font-bold">Message_Body</label>
-                    <textarea 
-                      rows={5} 
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="// Describe your proposal, opportunity, or feedback..." 
-                      className="w-full bg-gray-300 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 text-gray-900 dark:text-white placeholder-gray-600 dark:placeholder-slate-600 font-mono text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all resize-none"
-                    ></textarea>
-                  </div>
-                  
-                  <div className="pt-4">
-                    <button 
-                      type="submit"
-                      disabled={status === 'SENDING'}
-                      className="w-full bg-cyan-600 hover:bg-cyan-500 disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-bold py-4 rounded-lg flex items-center justify-center gap-3 transition-all group overflow-hidden relative shadow-lg"
-                    >
-                      <div className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
-                        {status === 'SENDING' ? (
-                          <MdHourglassTop size={20} />
-                        ) : (
-                          <MdSend size={20} />
-                        )}
-                      </div>
-                      <span className="font-mono tracking-widest uppercase relative z-10">
-                        {status === 'SENDING' ? '[ TRANSMITTING... ]' : '[ EXECUTE_SEND ]'}
-                      </span>
-                    </button>
-                    <p className="mt-4 text-[9px] text-slate-500 font-mono text-center uppercase tracking-widest">
-                      Transmission Protocol: AES-256 Encrypted Handshake
-                    </p>
-                  </div>
-                </form>
+                  ))}
+                </div>
               )}
-            </div>
-          </div>
+
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <label htmlFor="contact-name" className="text-xs font-mono font-semibold text-[var(--faint)] uppercase tracking-wider">
+                    $ name
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    name="name"
+                    required
+                    aria-describedby={status === 'ERROR' ? 'form-errors' : undefined}
+                    autoComplete="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="John Doe"
+                    className={inputClass}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="contact-email" className="text-xs font-mono font-semibold text-[var(--faint)] uppercase tracking-wider">
+                    $ email
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    required
+                    aria-describedby={status === 'ERROR' ? 'form-errors' : undefined}
+                    autoComplete="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="john@example.com"
+                    className={inputClass}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="contact-message" className="text-xs font-mono font-semibold text-[var(--faint)] uppercase tracking-wider">
+                    $ message
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    rows={4}
+                    name="message"
+                    required
+                    aria-describedby={status === 'ERROR' ? 'form-errors' : undefined}
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="How can we collaborate?"
+                    className={`${inputClass} resize-none`}
+                  />
+                </div>
+              </div>
+
+              <button type="submit" disabled={status === 'SENDING'} className="btn-ink w-full !py-3.5 disabled:opacity-60 disabled:cursor-not-allowed">
+                {status === 'SENDING' ? (
+                  <>
+                    <MdHourglassTop size={16} className="animate-spin" />
+                    <span>sending…</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-[var(--accent)]">$</span>
+                    <span>./send.sh</span>
+                  </>
+                )}
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </div>
